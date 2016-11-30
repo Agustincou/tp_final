@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    19:01:05 11/30/2016 
+// Create Date:    19:20:04 11/30/2016 
 // Design Name: 
-// Module Name:    Latch_MEM-WB 
+// Module Name:    Multiplexor_2in_1out 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,26 +18,27 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Latch_MEM_WB(Read_Data_Input, ALU_Result_input, Read_Data_Output, ALU_Result_Output);
+module Mux_2in_1out #(parameter DB = 16)(DatoA, DatoB, Sel, Salida);
 //-------------------------------------------Entradas-----------------------------------------//
-	input Read_Data_Input;
-	input ALU_Result_input;
+	input [DB-1:0] DatoA;
+	input [DB-1:0] DatoB;
+	input Sel;
 //--------------------------------------------Salidas-----------------------------------------//
-	output reg Read_Data_Output;
-	output reg ALU_Result_Output;
+	output reg [DB-1:0] Salida;
 //---------------------------------------------Wires------------------------------------------//
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
 	initial
 		begin
-			Read_Data_Output = 0;
-			ALU_Result_Output = 0;
+			Salida = 0;
 		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
 	always @(*)
-		begin
-			Read_Data_Output = Read_Data_Input;
-			ALU_Result_Output = ALU_Result_input;
-		end
+	begin
+		if(Sel == 1)
+			Salida = DatoA;
+		else
+			Salida = DatoB;
+	end
 endmodule

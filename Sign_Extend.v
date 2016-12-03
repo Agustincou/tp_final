@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:57:59 11/30/2016 
+// Create Date:    00:22:27 12/03/2016 
 // Design Name: 
-// Module Name:    Main_ID 
+// Module Name:    Sign_Extend 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main_ID(
+module Sign_Extend(
     );
 //-------------------------------------------Entradas-----------------------------------------//
 //--------------------------------------------Salidas-----------------------------------------//

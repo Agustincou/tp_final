@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    19:00:53 11/30/2016 
+// Create Date:    00:23:34 12/03/2016 
 // Design Name: 
-// Module Name:    Latch_EX-MEM 
+// Module Name:    Left_Shift_2 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Latch_EX_MEM(
+module Left_Shift_2(
     );
 //-------------------------------------------Entradas-----------------------------------------//
 //--------------------------------------------Salidas-----------------------------------------//

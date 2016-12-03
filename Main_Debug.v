@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    19:00:26 11/30/2016 
+// Create Date:    00:16:33 12/03/2016 
 // Design Name: 
-// Module Name:    Main_WB 
+// Module Name:    Main_Debug 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,22 +18,15 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main_WB(Dato1, Dato0, Sel, Resultado_Mux);
+module Main_Debug(
+    );
 //-------------------------------------------Entradas-----------------------------------------//
-	input Dato1;
-	input Dato0;
-	input Sel; //Esto debera verificarse por donde viene
 //--------------------------------------------Salidas-----------------------------------------//
-	output reg Resultado_Mux;
 //---------------------------------------------Wires------------------------------------------//
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
-	initial
-		begin
-			Resultado_Mux = 0;
-		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
-	Mux_2in_1out MUX(Dato1, Dato0, Sel, Resultado_Mux);
 //--------------------------------------------Logica------------------------------------------//
+
 
 endmodule

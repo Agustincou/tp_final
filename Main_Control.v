@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    00:16:49 12/03/2016 
+// Create Date:    00:15:27 12/03/2016 
 // Design Name: 
-// Module Name:    Main 
+// Module Name:    Main_Control 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main(
+module Main_Control(
     );
 //-------------------------------------------Entradas-----------------------------------------//
 //--------------------------------------------Salidas-----------------------------------------//

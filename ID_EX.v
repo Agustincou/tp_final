@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:58:34 11/30/2016 
+// Create Date:    18:59:50 11/30/2016 
 // Design Name: 
-// Module Name:    Main_MEM 
+// Module Name:    Latch_ID-EX 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main_MEM(
+module ID_EX(
     );
 //-------------------------------------------Entradas-----------------------------------------//
 //--------------------------------------------Salidas-----------------------------------------//

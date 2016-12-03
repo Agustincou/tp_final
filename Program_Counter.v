@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:59:17 11/30/2016 
+// Create Date:    00:20:10 12/03/2016 
 // Design Name: 
-// Module Name:    Latch_IF-ID 
+// Module Name:    Program_Counter 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Latch_IF_ID(
+module Program_Counter(
     );
 //-------------------------------------------Entradas-----------------------------------------//
 //--------------------------------------------Salidas-----------------------------------------//

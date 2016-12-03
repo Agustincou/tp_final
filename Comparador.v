@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:59:50 11/30/2016 
+// Create Date:    00:24:18 12/03/2016 
 // Design Name: 
-// Module Name:    Latch_ID-EX 
+// Module Name:    Comparador 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Latch_ID_EX(
+module Comparador(
     );
 //-------------------------------------------Entradas-----------------------------------------//
 //--------------------------------------------Salidas-----------------------------------------//

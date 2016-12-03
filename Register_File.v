@@ -39,7 +39,7 @@ module Register_File(clk, wr_enable3, read_addr1, read_addr2, write_addr3, write
 			reg_file[i] = 0;
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
-	always @(posedge clk)
+	always @(negedge clk)
 		begin
 			if (wr_enable3 == 1)
 				reg_file[write_addr3] <= write_data3;

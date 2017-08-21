@@ -18,13 +18,32 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main_Control(
+module Main_Control(Op, Funct, RegWrite, MemtoReg, MemWrite, ALUControl, ALUSrc, RegDst, Branch
     );
 //-------------------------------------------Entradas-----------------------------------------//
+	input [5:0] Op;
+	input [5:0] Funct;
 //--------------------------------------------Salidas-----------------------------------------//
+	output reg RegWrite;
+	output reg MemtoReg;
+	output reg MemWrite;
+	output reg ALUControl;
+	output reg ALUSrc;
+	output reg RegDst;
+	output reg Branch;
 //---------------------------------------------Wires------------------------------------------//
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
+	initial
+		begin
+			RegWrite = 0;
+			MemtoReg = 0;
+			MemWrite = 0;
+			ALUControl = 0;
+			ALUSrc = 0;
+			RegDst = 0;
+			Branch = 0;
+		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
 

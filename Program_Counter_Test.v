@@ -50,7 +50,19 @@ module Program_Counter_Test;
 		#100;
         
 		// Add stimulus here
+		addr_in = 6;
+		
+		#100;
+		
+		enable = 1;
 	end
+	
+	always 
+		begin //clock de 100 Mhz como el de la placa
+			clk = 1'b0;
+			#(10/2) clk = 1'b1;
+			#(10/2);
+		end
 		
 endmodule
 

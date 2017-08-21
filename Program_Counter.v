@@ -37,6 +37,8 @@ module Program_Counter(clk,enable,addr_in,addr_out);
 	always @(posedge clk)
 		begin
 			if (enable == 1)
-				addr_out <= addr_in;
+				begin
+					addr_out <= addr_in;
+				end
 		end
 endmodule

@@ -18,8 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Mux_3in_1out #(parameter DB = 16)(DatoA, DatoB, DatoC, Sel, Salida
-    );
+module Mux_3in_1out #(parameter DB = 32)(DatoA, DatoB, DatoC, Sel, Salida);
 //-------------------------------------------Entradas-----------------------------------------//
     input [DB-1:0] DatoA;
     input [DB-1:0] DatoB;
@@ -38,17 +37,17 @@ module Mux_3in_1out #(parameter DB = 16)(DatoA, DatoB, DatoC, Sel, Salida
 //--------------------------------------------Logica------------------------------------------//
 	always @(*)
 	begin
-		if(Sel == 2)
+		if(Sel == 0)
 			begin
-				Salida = DatoA/*8*/;
+				Salida = DatoA;
 			end
 		else if(Sel == 1)
 			begin
 				Salida = DatoB;
 			end
-		else if(Sel == 0)
+		else if(Sel == 2)
 			begin
-				Salida = DatoC/*9*/;
+				Salida = DatoC;
 			end
 	end
 endmodule

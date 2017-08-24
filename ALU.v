@@ -1,50 +1,42 @@
 `timescale 1ns / 1ps
 //`define N 7
 
-module ALU #(parameter N=7)(BusA, BusB, OpCode, Result);
+module ALU #(parameter N=32)(busA, busB, opCode, result, zero, overflow);
 
 //-------------------------------------------Entradas-----------------------------------------//	
-	input signed [N-1:0] BusA;
-   input [N-1:0] BusB;
-   input [5:0] OpCode;	
+	input signed [N-1:0] busA;
+   input	signed [N-1:0] busB;
+   input [3:0] opCode;
 //--------------------------------------------Salidas-----------------------------------------//
-	output reg[N-1:0] Result;
+	output reg [N-1:0] result;
+	output reg zero;
+	output reg overflow;
 //---------------------------------------------Wires------------------------------------------//	
-	wire [N-1:0] Suma;
-	wire [N-1:0] Resta;
-	wire [N-1:0] And;
-	wire [N-1:0] Xor;
-	wire [N-1:0] Or;
-	wire [N-1:0] Nor;
-	wire [N-1:0] Asr;
-	wire [N-1:0] Lsr;
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
 	initial
 		begin
-			Result = 0;
+			result = 0;
+			zero = 0;
+			overflow = 0;
 		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
-	assign Suma = BusA + BusB;
-	assign Resta = BusA - BusB;
-	assign And = BusA & BusB;
-	assign Xor = BusA ^ BusB;
-	assign Or = BusA | BusB;
-	assign Nor = ~(BusA | BusB);
-	assign Asr = BusA >>> 1; //Arithmetic Shift Right
-	assign Lsr = BusA >> 1; //Logical Shift Roght
-
-	always @(*)
-      case(OpCode)
-			'b100000: Result = Suma;
-			'b100010: Result = Resta;
-			'b100100: Result = And;
-			'b100101: Result = Or;
-			'b100110: Result = Xor;
-			'b000011: Result = Asr;
-			'b000010: Result = Lsr;
-			'b100111: Result = Nor;
-      default: Result = 0;
-		endcase
+	always@(*)
+		begin
+			case(opCode)				
+				0: {overflow,result} = busB <<  busA[4:0];	//SLL
+				1: {overflow,result} = busB >>  busA[4:0];	//SRL
+				2: {overflow,result} = busB >>> busA[4:0];	//SRA
+				3: {overflow,result} = busA + busB;				//ADD
+				4: {overflow,result} = busA - busB;				//SUB
+				5: {overflow,result} = busA & busB;				//AND
+				6: {overflow,result} = busA | busB;				//OR
+				7: {overflow,result} = busA ^ busB;				//XOR
+				8: {overflow,result} = ~(busA | busB);			//NOR
+				9: {overflow,result} = (busA < busB);			//SLT
+				default: {overflow,result} = 0;
+			endcase
+			zero = (result==0)? 1'b1 : 1'b0;
+		end
 endmodule

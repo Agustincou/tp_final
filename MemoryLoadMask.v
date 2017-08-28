@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date:    18:59:17 11/30/2016 
+// Create Date:    20:38:28 08/28/2017 
 // Design Name: 
-// Module Name:    Latch_IF-ID 
+// Module Name:    MemoryLoadMask 
 // Project Name: 
 // Target Devices: 
 // Tool versions: 
@@ -18,48 +18,28 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module IF_ID(clk, reset, clear, stall_ID, programCounter_in, instruction_in, enableDebug, resetDebug, programCounter_out, instruction_out);
+module MemoryLoadMask(dataIn, maskLength, dataOut);
 //-------------------------------------------Entradas-----------------------------------------//
-	input clk;
-	input reset;
-	input clear;
-	input stall_ID;
-	input	[7:0] programCounter_in;
-	input	[31:0] instruction_in;
-	//Debug
-	input enableDebug;
-	input resetDebug;
+	input      [31:0]	dataIn;
+	// 0:Palabra completa 1:Media palabra 2:Byte
+	input      [1:0]	maskLength;
 //--------------------------------------------Salidas-----------------------------------------//
-	output reg [7:0] programCounter_out;
-	output reg [31:0] instruction_out;
+	output reg [31:0]	dataOut;
 //---------------------------------------------Wires------------------------------------------//
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
-	initial
-		begin
-			programCounter_out = 0;
-			instruction_out = 0;
-		end
+	initial begin
+		dataOut = 0;
+	end
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
-	always @(negedge clock)
+	always @*
 		begin
-			if(reset || resetDebug)
-				begin
-					instruction_out <= 0;
-					programCounter_out <= 0;
-				end
-			else if(~stall_ID && enableDebug)
-				begin
-					if(clear)
-						begin
-							instruction_out <= 0;
-						end
-					else
-						begin
-							instruction_out <= instruction_in;
-						end
-					programCounter_out <= programCounter_in;
-				end
+			case (maskLength)
+				0: dataOut <= dataIn;
+				1: dataOut <= dataIn&32'hFFFF;
+				2: dataOut <= dataIn&32'hFF;
+				default: dataOut <= dataIn;
+			endcase
 		end
 endmodule

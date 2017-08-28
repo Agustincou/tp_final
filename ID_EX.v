@@ -92,47 +92,7 @@ module ID_EX(clk, reset, syncClr, aluSrc_in, aluShiftImm_in, regDst_in, loadImm_
 //--------------------------------------------Logica------------------------------------------//
 	always @(negedge clk)
 		begin
-			if (reset)
-				begin
-					aluControl_out <= 0;
-					signImm_out <= 0;
-					readData1_out <= 0;
-					readData2_out <= 0;
-					aluSrc_out <= 0;
-					aluShiftImm_out <= 0;
-					memWrite_out <= 0;
-					memToReg_out <= 0;
-					memReadWidth_out <= 0;
-					regWrite_out <= 0;
-					rs_out <= 0;
-					rt_out <= 0;
-					rd_out <= 0;
-					sa_out <= 0;
-					regDst_out <= 0;
-					loadImm_out <= 0;
-					eop_out <= 0;
-				end
-			else if(resetDebug)
-				begin
-					aluControl_out <= 0;
-					signImm_out <= 0;
-					readData1_out <= 0;
-					readData2_out <= 0;
-					aluSrc_out <= 0;
-					aluShiftImm_out <= 0;
-					memWrite_out <= 0;
-					memToReg_out <= 0;
-					memReadWidth_out <= 0;
-					regWrite_out <= 0;
-					rs_out <= 0;
-					rt_out <= 0;
-					rd_out <= 0;
-					sa_out <= 0;
-					regDst_out <= 0;
-					loadImm_out <= 0;
-					eop_out <= 0;
-				end
-			else if(syncClr && enableDebug)
+			if (reset || resetDebug || (syncClr && enableDebug))
 				begin
 					aluControl_out <= 0;
 					signImm_out <= 0;

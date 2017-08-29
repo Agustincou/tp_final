@@ -1,0 +1,74 @@
+SET_FLAG DEBUG FALSE
+SET_FLAG MODE INTERACTIVE
+SET_FLAG STANDALONE_MODE TRUE
+SET_PREFERENCE flowvendor Other
+SET_PREFERENCE verilogsim true
+SET_PREFERENCE vhdlsim false
+SET_PREFERENCE formalverification false
+SET_PREFERENCE subworkingdirectory ./tmp/_cg/
+SET_PREFERENCE speedgrade -3
+SET_PREFERENCE asysymbol true
+SET_PREFERENCE addpads false
+SET_PREFERENCE implementationfiletype Ngc
+SET_PREFERENCE device xc6slx16
+SET_PREFERENCE projectname InstructionMemory
+SET_PREFERENCE foundationsym false
+SET_PREFERENCE devicefamily spartan6
+SET_PREFERENCE busformat BusFormatAngleBracketNotRipped
+SET_PREFERENCE package csg324
+SET_PREFERENCE createndf false
+SET_PREFERENCE simulationfiles Structural
+SET_PREFERENCE outputdirectory ./
+SET_PREFERENCE designentry Verilog
+SET_PREFERENCE workingdirectory .\tmp\
+SET_PREFERENCE removerpms false
+SET_PARAMETER component_name InstructionMemory
+SET_PARAMETER bar2_type Memory
+SET_PARAMETER bar1_prefetchable false
+SET_PARAMETER maximum_latency 00
+SET_PARAMETER bar2_enabled false
+SET_PARAMETER minimum_grant 00
+SET_PARAMETER bar1_enabled false
+SET_PARAMETER bar0_size 1
+SET_PARAMETER device_id 0050
+SET_PARAMETER vendor_id 10EE
+SET_PARAMETER bar0_enabled false
+SET_PARAMETER bus_standard PCI_33MHz
+SET_PARAMETER notes none
+SET_PARAMETER sub_class 00
+SET_PARAMETER bar1_size 1
+SET_PARAMETER bar0_prefetchable false
+SET_PARAMETER capability_list false
+SET_PARAMETER class_code 000000
+SET_PARAMETER base_class 00
+SET_PARAMETER bar2_size 1
+SET_PARAMETER bar2_scale Megabytes
+SET_PARAMETER bar1_scale Megabytes
+SET_PARAMETER subsystem_device_id 0050
+SET_PARAMETER subsystem_vendor_id 10EE
+SET_PARAMETER bar0_type Memory
+SET_PARAMETER bar2_value FFF00000
+SET_PARAMETER bar0_scale Megabytes
+SET_PARAMETER clock_select Global
+SET_PARAMETER bar2_64_bit_user_interface false
+SET_PARAMETER bar1_value FFF00000
+SET_PARAMETER capability_address 80
+SET_PARAMETER bar1_64_bit_user_interface false
+SET_PARAMETER bar0_value FFF00000
+SET_PARAMETER bar2_prefetchable false
+SET_PARAMETER bar0_64_bit_user_interface false
+SET_PARAMETER interface 00
+SET_PARAMETER cardbus_cis_pointer 00000000
+SET_PARAMETER bar1_type Memory
+SET_PARAMETER revision_id 00
+SET_PARAMETER disclaimer_accept true
+SET_CORE_CLASS com.xilinx.ip.pci32_spng_v4_14.pci32_spng_v4_14
+SET_CORE_PATH C:\Xilinx\14.7\ISE_DS\ISE\coregen\ip\xilinx\network\com\xilinx\ip\pci32_spng_v4_14\
+SET_CORE_GUIPATH C:\Xilinx\14.7\ISE_DS\ISE\coregen\ip\xilinx\network\com\xilinx\ip\pci32_spng_v4_14\gui\pci32_spng_v4_14.tcl
+SET_CORE_NAME 32-bit Initiator/Target for PCI (Spartan-6 only)
+SET_CORE_VERSION 4.14
+SET_CORE_VLNV xilinx.com:ip:pci32_spng:4.14
+SET_CORE_DATASHEET C:\Xilinx\14.7\ISE_DS\ISE\coregen\ip\xilinx\network\com\xilinx\ip\pci32_spng_v4_14\doc\pci_32_ds206.pdf
+SET_CORE_LICENSE_KEY pci32_spng@2011.06
+ADD_CORE_DOCUMENT <C:\Xilinx\14.7\ISE_DS\ISE\coregen\ip\xilinx\network\com\xilinx\ip\pci32_spng_v4_14\doc\pci_32_ds206.pdf><Data Sheet>
+ADD_CORE_DOCUMENT <C:\Xilinx\14.7\ISE_DS\ISE\coregen\ip\xilinx\network\com\xilinx\ip\pci32_spng_v4_14\doc\pci32_spng_v4_14_vinfo.html><Version Information>

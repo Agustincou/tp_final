@@ -1,0 +1,43 @@
+SET_PARAMETER bar2_type Memory
+SET_PARAMETER bar1_prefetchable false
+SET_PARAMETER maximum_latency 00
+SET_PARAMETER bar2_enabled false
+SET_PARAMETER minimum_grant 00
+SET_PARAMETER bar1_enabled false
+SET_PARAMETER bar0_size 1
+SET_PARAMETER device_id 0050
+SET_PARAMETER vendor_id 10EE
+SET_PARAMETER bar0_enabled false
+SET_PARAMETER bus_standard PCI_33MHz
+SET_PARAMETER notes none
+SET_PARAMETER sub_class 00
+SET_PARAMETER bar1_size 1
+SET_PARAMETER bar0_prefetchable false
+SET_PARAMETER capability_list false
+SET_PARAMETER class_code 000000
+SET_PARAMETER base_class 00
+SET_PARAMETER bar2_size 1
+SET_PARAMETER bar2_scale Megabytes
+SET_PARAMETER component_name InstructionMemory
+SET_PARAMETER bar1_scale Megabytes
+SET_PARAMETER subsystem_device_id 0050
+SET_PARAMETER subsystem_vendor_id 10EE
+SET_PARAMETER bar0_type Memory
+SET_PARAMETER bar2_value FFF00000
+SET_PARAMETER bar0_scale Megabytes
+SET_PARAMETER clock_select Global
+SET_PARAMETER bar2_64_bit_user_interface false
+SET_PARAMETER bar1_value FFF00000
+SET_PARAMETER capability_address 80
+SET_PARAMETER bar1_64_bit_user_interface false
+SET_PARAMETER bar0_value FFF00000
+SET_PARAMETER bar2_prefetchable false
+SET_PARAMETER bar0_64_bit_user_interface false
+SET_PARAMETER interface 00
+SET_PARAMETER cardbus_cis_pointer 00000000
+SET_PARAMETER bar1_type Memory
+SET_PARAMETER revision_id 00
+SET_PARAMETER disclaimer_accept true
+SET_ERROR_CODE 2
+SET_ERROR_MSG  CANCEL: Customization cancelled.
+SET_ERROR_TEXT Finished initializing IP model.	

@@ -19,7 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module ID_EX(clk, reset, syncClr, aluSrc_in, aluShiftImm_in, regDst_in, loadImm_in, memToReg_in, regWrite_in, eop_in, 
-				memReadWidth, memWrite_in, aluControl_in, rs_in, rt_in, rd_in, sa_in, signImm_in, readData1_in, readData2_in, 
+				memReadWidth_in, memWrite_in, aluControl_in, rs_in, rt_in, rd_in, sa_in, signImm_in, readData1_in, readData2_in, 
 				enableDebug, resetDebug, aluSrc_out, aluShiftImm_out, memToReg_out, regDst_out, loadImm_out, regWrite_out, 
 				eop_out, memReadWidth_out, memWrite_out, aluControl_out, rs_out, rt_out, rd_out, sa_out, signImm_out, 
 				readData1_out, readData2_out);

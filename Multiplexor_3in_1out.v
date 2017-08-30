@@ -49,5 +49,9 @@ module Mux_3in_1out #(parameter DB = 32)(DatoA, DatoB, DatoC, Sel, Salida);
 			begin
 				Salida = DatoC;
 			end
+		else
+			begin
+				Salida = DatoC;
+			end
 	end
 endmodule

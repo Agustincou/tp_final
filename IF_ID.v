@@ -42,7 +42,7 @@ module IF_ID(clk, reset, clear, stall_ID, programCounter_in, instruction_in, ena
 		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
-	always @(negedge clock)
+	always @(negedge clk)
 		begin
 			if(reset || resetDebug)
 				begin

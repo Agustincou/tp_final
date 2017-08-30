@@ -39,11 +39,7 @@ module Program_Counter(clk,notEnable,reset,enableDebug,resetDebug,addr_in,addr_o
 //--------------------------------------------Logica------------------------------------------//
 	always @(negedge clk)
 		begin
-			if(reset)
-				begin
-					addr_out <= 0;
-				end
-			else if(resetDebug)
+			if(reset || resetDebug)
 				begin
 					addr_out <= 0;
 				end

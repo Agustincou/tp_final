@@ -206,8 +206,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	end
 	*/
 //--------------------------------------Declaracion de Bloques--------------------------------//
-	/*
-	Control_Unit control(
+	Main_Control unit_control(
 		//Entradas
 	 	.InstrOP(instructionID[31:26]),
 		.InstrFunc(instructionID[5:0]),
@@ -228,7 +227,6 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.memReadWidth(memReadWidth), // 0:Palabra completa 1:Media palabra 2:Byte
 	    .aluControlCU(aluControl)
 	 );
-	*/
 	 
 	DataMemory ram(
 	  .clka(clk),

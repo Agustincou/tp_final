@@ -461,9 +461,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.addr_out(pcFE)
 	 );
 	 
-	 
-	 /*
-	 Hazard_Unit hazards (
+	 Main_Hazard hazards (
 		//Entradas
 	 	.branchID(branch),
 		.rsID(instructionID[25:21]),
@@ -488,7 +486,6 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.forwardAEX(forwardAEX),
 		.forwardBEX(forwardBEX)
 	 );
-	 */
 	 
 	 /*
 	 DebugUnit debugUnit(

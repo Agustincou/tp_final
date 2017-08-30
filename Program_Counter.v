@@ -18,13 +18,16 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Program_Counter(clk,enable,addr_in,addr_out);
+module Program_Counter(clk,notEnable,reset,enableDebug,resetDebug,addr_in,addr_out);
 //-------------------------------------------Entradas-----------------------------------------//
 	input clk;
-	input enable;
-	input	[31:0] addr_in;
+	input notEnable;
+	input reset;
+	input enableDebug;
+	input resetDebug;
+	input	[7:0] addr_in;
 //--------------------------------------------Salidas-----------------------------------------//
-	output reg [31:0] addr_out;
+	output reg [7:0] addr_out;
 //---------------------------------------------Wires------------------------------------------//
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
@@ -34,11 +37,16 @@ module Program_Counter(clk,enable,addr_in,addr_out);
 		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
-	always @(posedge clk)
+	always @(negedge clk)
 		begin
-			if (enable == 1)
+			if(reset || resetDebug)
+				begin
+					addr_out <= 0;
+				end
+			else if(~notEnable && enableDebug)
 				begin
 					addr_out <= addr_in;
 				end
 		end
+
 endmodule

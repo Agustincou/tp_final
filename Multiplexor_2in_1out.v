@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Mux_2in_1out #(parameter DB = 16)(DatoA, DatoB, Sel, Salida);
+module Mux_2in_1out #(parameter DB = 32)(DatoA, DatoB, Sel, Salida);
 //-------------------------------------------Entradas-----------------------------------------//
 	input [DB-1:0] DatoA;
 	input [DB-1:0] DatoB;
@@ -36,9 +36,9 @@ module Mux_2in_1out #(parameter DB = 16)(DatoA, DatoB, Sel, Salida);
 //--------------------------------------------Logica------------------------------------------//
 	always @(*)
 	begin
-		if(Sel == 1)
-			Salida = DatoA;
+		if(Sel == 0)
+			Salida <= DatoA;
 		else
-			Salida = DatoB;
+			Salida <= DatoB;
 	end
 endmodule

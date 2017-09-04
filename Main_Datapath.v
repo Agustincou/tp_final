@@ -490,8 +490,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	 );
 	 */
 	 
-	 /*
-	 DebugUnit debugUnit(
+	 Main_Debug debugUnit(
 		//Entradas
 		.clock(clock70),
 		.reset(resetGral),
@@ -577,10 +576,8 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.sendCounter(sendCounter),
 		.flagDone(sentFlag)
 	 );
-	 */
 	 
-	/*
-	UART uartMod(
+	Main_Uart uartMod(
 		//Entradas
 		.clock(clock70),
 		.uart_rx(uartRxPin),
@@ -596,7 +593,6 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.uart_tx(uartTxPin),
 		.uart_tx_done(uartDataSent)
 	);
-	*/
 	
 	Mux_2in_1out mux(
 		.DatoA(rtEX),

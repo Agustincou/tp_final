@@ -606,7 +606,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.DatoA(srcAEX),
 		.DatoB(saEX),
 		.DatoC('d16),
-		.Sel((loadImmEX << 1) + aluShiftImmEX),
+		.Sel((loadImmEX)? 'd2 : aluShiftImmEX),
 		.Salida(aluOperand1)
 	);
 	
@@ -642,7 +642,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.DatoA(pcNext),
 		.DatoB(pcBranchAddr),
 		.DatoC(pcBranchAddr),
-		.Sel((jump << 1) + pcSrc),
+		.Sel((jump) ? 'd2 : pcSrc),
 		.Salida(PC)
 	);
 	
@@ -713,5 +713,8 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	assign writeDataEX = srcBEX;
 	//mux12 -> assign branchSrcA= (forwardAID)? aluOutMEM: readData1;
 	//mux13 -> assign branchSrcB= (forwardBID)? aluOutMEM: readData2;
+	
+	reg iasd = 1;
+	assign debugEnable = iasd;
 	
 endmodule

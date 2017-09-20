@@ -18,14 +18,50 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main(
-    );
+module Main(clk, reset, uartRxPin, uartTxPin, ledIdle, sentFlag, notStartUartTx, ledDataAvailable, sendCounter);
 //-------------------------------------------Entradas-----------------------------------------//
+	input clk;
+	input reset;
+	input uartRxPin;
 //--------------------------------------------Salidas-----------------------------------------//
+	output uartTxPin;
+	output ledIdle;
+	output sentFlag;
+	output notStartUartTx;
+	output ledDataAvailable;
+	output [7:0] sendCounter;
 //---------------------------------------------Wires------------------------------------------//
+	wire AluZero; 
+	wire ALUOverflow;
+	wire dcmOut;
+	wire dcmOut70;
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
 //--------------------------------------Declaracion de Bloques--------------------------------//
+	//Modulo generado con IP core
+	Clock clock(
+		.CLK_IN1(clk),		// clock de la placa a 100MHz
+		.CLK_OUT1(dcmOut),	// clock a 12.5MHz
+		.CLK_OUT2(dcmOut70)	// clock a 12.5MHz desfasado 70 grados
+	);
+	
+	Main_Datapath datapath( 		
+		//Entradas
+	   .clk(dcmOut),
+		.clk_70(dcmOut70),
+		.reset(reset),
+		.uartRxPin(uartRxPin),
+		
+		//Salidas
+		.uartTxPin(uartTxPin),
+		.ALUzero(AluZero),
+		.ALUOverflow(ALUOverflow),
+		.ledIdle(ledIdle),
+		.sendCounter(sendCounter),
+		.sentFlag(sentFlag),
+		.notStartUartTx(notStartUartTx),
+		.ledDataAvailable(ledDataAvailable)
+	);
 //--------------------------------------------Logica------------------------------------------//
 
 

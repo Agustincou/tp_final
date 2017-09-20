@@ -1,6 +1,7 @@
 # Output products list for <InstructionMemory>
 InstructionMemory.asy
 InstructionMemory.gise
+InstructionMemory.mif
 InstructionMemory.ngc
 InstructionMemory.sym
 InstructionMemory.v
@@ -51,4 +52,5 @@ InstructionMemory\simulation\timing\wave_mti.do
 InstructionMemory\simulation\timing\wave_ncsim.sv
 InstructionMemory_flist.txt
 InstructionMemory_xmdf.tcl
+_xmsgs\pn_parser.xmsgs
 summary.log

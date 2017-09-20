@@ -461,9 +461,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.addr_out(pcFE)
 	 );
 	 
-	 
-	 /*
-	 Hazard_Unit hazards (
+	 Main_Hazard hazards (
 		//Entradas
 	 	.branchID(branch),
 		.rsID(instructionID[25:21]),
@@ -488,7 +486,6 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.forwardAEX(forwardAEX),
 		.forwardBEX(forwardBEX)
 	 );
-	 */
 	 
 	 Main_Debug debugUnit(
 		//Entradas
@@ -594,7 +591,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.uart_tx_done(uartDataSent)
 	);
 	
-	Mux_2in_1out mux(
+	Mux_2in_1out #(5) mux(
 		.DatoA(rtEX),
 		.DatoB(rdEX),
 		.Sel(regDstEX),
@@ -605,7 +602,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.DatoA(srcAEX),
 		.DatoB(saEX),
 		.DatoC('d16),
-		.Sel((loadImmEX << 1) + aluShiftImmEX),
+		.Sel((loadImmEX)? 'd2 : aluShiftImmEX),
 		.Salida(aluOperand1)
 	);
 	
@@ -616,14 +613,14 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.Salida(aluOperand2)
 	);
 	
-	Mux_2in_1out mux4(
+	Mux_2in_1out #(1) mux4(
 		.DatoA(branch & branchTaken),
 		.DatoB(1),
 		.Sel(jump),
 		.Salida(pcSrc)
 	);
 	
-	Mux_2in_1out mux5(
+	Mux_2in_1out #(1) mux5(
 		.DatoA(branchSrcA == branchSrcB),
 		.DatoB(branchSrcA != branchSrcB),
 		.Sel(branchType),
@@ -637,22 +634,22 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.Salida(resultWB)
 	);
 	
-	Mux_3in_1out mux7(
+	Mux_3in_1out #(8) mux7(
 		.DatoA(pcNext),
 		.DatoB(pcBranchAddr),
 		.DatoC(pcBranchAddr),
-		.Sel((jump << 1) + pcSrc),
+		.Sel((jump) ? 'd2 : pcSrc),
 		.Salida(PC)
 	);
 	
-	Mux_2in_1out mux8(
+	Mux_2in_1out #(4) mux8(
 		.DatoA(memWriteMEM),
 		.DatoB(4'b0),
 		.Sel(debugRamSrc),
 		.Salida(WEA)
 	);
 	
-	Mux_2in_1out mux9(
+	Mux_2in_1out #(8) mux9(
 		.DatoA(aluOutMEM[7:0]),
 		.DatoB(debugMemAddr),
 		.Sel(debugRamSrc),
@@ -712,5 +709,10 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	assign writeDataEX = srcBEX;
 	//mux12 -> assign branchSrcA= (forwardAID)? aluOutMEM: readData1;
 	//mux13 -> assign branchSrcB= (forwardBID)? aluOutMEM: readData2;
+	
+	reg uno = 1;
+	reg cero = 0;
+	assign debugEnable = uno;
+	assign debugRamSrc = cero;
 	
 endmodule

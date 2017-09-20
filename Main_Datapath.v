@@ -595,7 +595,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	);
 	*/
 	
-	Mux_2in_1out mux(
+	Mux_2in_1out #(5) mux(
 		.DatoA(rtEX),
 		.DatoB(rdEX),
 		.Sel(regDstEX),
@@ -617,14 +617,14 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.Salida(aluOperand2)
 	);
 	
-	Mux_2in_1out mux4(
+	Mux_2in_1out #(1) mux4(
 		.DatoA(branch & branchTaken),
 		.DatoB(1),
 		.Sel(jump),
 		.Salida(pcSrc)
 	);
 	
-	Mux_2in_1out mux5(
+	Mux_2in_1out #(1) mux5(
 		.DatoA(branchSrcA == branchSrcB),
 		.DatoB(branchSrcA != branchSrcB),
 		.Sel(branchType),
@@ -638,7 +638,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.Salida(resultWB)
 	);
 	
-	Mux_3in_1out mux7(
+	Mux_3in_1out #(8) mux7(
 		.DatoA(pcNext),
 		.DatoB(pcBranchAddr),
 		.DatoC(pcBranchAddr),
@@ -646,14 +646,14 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.Salida(PC)
 	);
 	
-	Mux_2in_1out mux8(
+	Mux_2in_1out #(4) mux8(
 		.DatoA(memWriteMEM),
 		.DatoB(4'b0),
 		.Sel(debugRamSrc),
 		.Salida(WEA)
 	);
 	
-	Mux_2in_1out mux9(
+	Mux_2in_1out #(8) mux9(
 		.DatoA(aluOutMEM[7:0]),
 		.DatoB(debugMemAddr),
 		.Sel(debugRamSrc),
@@ -714,7 +714,9 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	//mux12 -> assign branchSrcA= (forwardAID)? aluOutMEM: readData1;
 	//mux13 -> assign branchSrcB= (forwardBID)? aluOutMEM: readData2;
 	
-	reg iasd = 1;
-	assign debugEnable = iasd;
+	reg uno = 1;
+	reg cero = 0;
+	assign debugEnable = uno;
+	assign debugRamSrc = cero;
 	
 endmodule

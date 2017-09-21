@@ -66,7 +66,7 @@ module Main_Datapath_Test;
 		// Wait 100 ns for global reset to finish
 		#100;
 		reset = 1;
-		#80;
+		#180;
 		reset = 0;
 		// Add stimulus here
 
@@ -76,7 +76,14 @@ module Main_Datapath_Test;
 			clk = 1'b0;
 			#(100/2) clk = 1'b1;
 			#(100/2);
-	end   
+	end
+	
+	always begin //clock de 100 Mhz como el de la placa
+			#(70/2)
+			clk_70 = 1'b0;
+			#(100/2) clk_70 = 1'b1;
+			#(30/2);
+	end 
 	
 endmodule
 

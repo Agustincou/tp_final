@@ -120,7 +120,24 @@ module Main_Debug(
 	//cantidad total de datos a enviar
 	localparam [7:0]cantDatos=8'd247;
 //-----------------------------------------Inicializacion-------------------------------------//
-	assign data[0] = 	FE_pc;
+	initial
+		begin
+			nextFifoValue = 0;
+			writeFifoFlag = 0;
+			datapathOn = 0;
+			datapathReset = 0;
+			ledIdle = 0;
+			notStartUartTrans = 0;
+			sendCounter = 0;
+			flagDone	= 0;
+			
+			current_state = 0;
+			next_state = 0;
+			restartCounter = 0;
+		end
+//--------------------------------------Declaracion de Bloques--------------------------------//
+//--------------------------------------------Logica------------------------------------------//
+	assign data[0] = 	  FE_pc;
 	assign data[1] =    IF_ID_instr   		 [31:24];
 	assign data[2] =    IF_ID_instr   		 [23:16];
 	assign data[3] =    IF_ID_instr   		 [15:8];
@@ -385,8 +402,8 @@ module Main_Debug(
 								  (sendCounter>=235 && sendCounter<=238)? 13:
 								  (sendCounter>=239 && sendCounter<=242)? 14:
 								  (sendCounter>=243 && sendCounter<=246)? 15: 0;
-//--------------------------------------Declaracion de Bloques--------------------------------//
-//--------------------------------------------Logica------------------------------------------//
+								  
+								  
 	always @(posedge clock) begin
 		if(reset)begin
 			current_state = INIT ;
@@ -500,7 +517,7 @@ module Main_Debug(
 					end
 					else begin
 						flagDone=0;
-						notStartUartTrans=0;
+						notStartUartTrans=0; //Se le dice a la uart que envie
 					end
 				end
 			end

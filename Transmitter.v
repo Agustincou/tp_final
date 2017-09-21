@@ -45,23 +45,23 @@ module Transmitter #(parameter DBIT=8, parameter SB_TICK=16)(s_tick, tx, din, tx
 	
    always @(posedge clk)
 	begin
-	tx_done_tick = 0;
+		tx_done_tick = 0;
+		//------------------------------------------------------------
+		// Asignación síncrona: Actualización del estado y las variables	
+		if(reset == 1) 
+			state = idle;
+		else 
+			begin
+				n_reg = n_next;
+				s_reg = s_next;
+				b_reg = b_next;
+				tx_done_tick = 0;
+				state = nextState;
+			end
+		//------------------------------------------------------------
 		if (s_tick == 1)
 		begin
-	//------------------------------------------------------------
-	// Asignación síncrona: Actualización del estado y las variables	
-			if(reset == 1) 
-				state = idle;
-			else 
-				begin
-					n_reg = n_next;
-					s_reg = s_next;
-					b_reg = b_next;
-					tx_done_tick = 0;
-					state = nextState;
-				end
-	//------------------------------------------------------------
-	// Asignación síncrona: Actualización del siguiente estado	
+		// Asignación síncrona: Actualización del siguiente estado	
 			case(state)
 			idle:  //
 				if (tx_start == 1)

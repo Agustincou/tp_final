@@ -489,8 +489,8 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	 
 	 Main_Debug debugUnit(
 		//Entradas
-		.clock(clock70),
-		.reset(resetGral),
+		.clock(clk_70),
+		.reset(reset),
 		.endOfProgram(eopFlagWB),
 		.uartFifoDataIn(uartFifoDataIn),
 		.uartDataAvailable(uartDataAvailable),
@@ -576,18 +576,17 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	 
 	Main_Uart uartMod(
 		//Entradas
-		.clock(clock70),
-		.uart_rx(uartRxPin),
-		.uart_reset(resetGral),
+		.clk(clk_70),
+		.rx(uartRxPin),
+		.uart_reset(reset),
 		.readFlag(uartReadFlag),
-		.writeFlag(uartWriteFlag),
 		.dataToSend(dataToUartOutFifo),
 		.uart_tx_start(notStartUartTrans),
 		
 		//Salidas
-		.receivedData(uartFifoDataIn),
-		.dataAvailable(uartDataAvailable),
-		.uart_tx(uartTxPin),
+		.receivedData(), //SE SACA LA VARIABLE "uartFifoDataIn" SOLO PARA TESTEAR SIN UART
+		.dataAvailable(), //SE SACA LA VARIABLE "uartDataAvailable" SOLO PARA TESTEAR SIN UART
+		.tx(uartTxPin),
 		.uart_tx_done(uartDataSent)
 	);
 	
@@ -712,7 +711,10 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	
 	reg uno = 1;
 	reg cero = 0;
-	assign debugEnable = uno;
-	assign debugRamSrc = cero;
+	//assign debugEnable = uno;
+	//assign debugRamSrc = cero;
+	
+	assign uartFifoDataIn = "c";
+	assign uartDataAvailable = uno;
 	
 endmodule

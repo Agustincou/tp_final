@@ -127,7 +127,7 @@ module Main_Debug(
 			datapathOn = 0;
 			datapathReset = 0;
 			ledIdle = 0;
-			notStartUartTrans = 0;
+			notStartUartTrans = 1;
 			sendCounter = 0;
 			flagDone	= 0;
 			

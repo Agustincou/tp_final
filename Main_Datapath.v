@@ -581,7 +581,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.uart_reset(reset),
 		.readFlag(uartReadFlag),
 		.dataToSend(dataToUartOutFifo),
-		.uart_tx_start(notStartUartTrans),
+		.uart_tx_start(~notStartUartTrans),
 		
 		//Salidas
 		.receivedData(), //SE SACA LA VARIABLE "uartFifoDataIn" SOLO PARA TESTEAR SIN UART

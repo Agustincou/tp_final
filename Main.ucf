@@ -1,0 +1,18 @@
+
+
+NET "sendCounter[6]" LOC = K15;
+NET "sendCounter[5]" LOC = J13;
+NET "sendCounter[4]" LOC = N14;
+NET "sendCounter[3]" LOC = R18;
+NET "sendCounter[2]" LOC = V17;
+NET "sendCounter[1]" LOC = U17;
+NET "sendCounter[0]" LOC = U16;
+NET "notStartUartTx" LOC = V14;
+NET "ledIdle" LOC = V12;
+NET "reset" LOC = N17;
+NET "sentFlag" LOC = V15;
+NET "uartTxPin" LOC = D4;
+NET "uartRxPin" LOC = C4;
+NET "clk" LOC = E3;
+NET "ledDataAvailable" LOC = V11;
+NET "sendCounter[7]" LOC = H17;

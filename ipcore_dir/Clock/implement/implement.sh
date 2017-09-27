@@ -83,7 +83,7 @@ echo 'Running trce'
 trce -e 10 routed -o routed mapped.pcf
 
 echo 'Running design through bitgen'
-bitgen -w routed
+bitgen -w routed -g UnconstrainedPins:Allow
 
 echo 'Running netgen to create gate level model for the clocking wizard example design'
 netgen -ofmt verilog -sim -sdf_anno false -tm Clock_exdes -w routed.ncd routed.v

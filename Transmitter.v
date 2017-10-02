@@ -59,6 +59,7 @@ module Transmitter #(parameter DBIT=8, parameter SB_TICK=16)(s_tick, tx, din, tx
 				state = nextState;
 			end
 		//------------------------------------------------------------
+		//------------------------------------------------------------
 		if (s_tick == 1)
 		begin
 		// Asignación síncrona: Actualización del siguiente estado	

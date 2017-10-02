@@ -39,11 +39,11 @@ module Receiver #(parameter DBIT=8, parameter SB_TICK=16)(s_tick, rx, dout, rx_d
 	reg [3:0] state;
 	reg [3:0] nextState; //Tendremos 4 estados y utilizaremos 4 bits para usar la lógica "One Hot - One Cold".
 	
-			//Declaramos los 4 estados que tendremos
-			parameter idle = 4'b0001;
-			parameter start = 4'b0010;
-			parameter data = 4'b0100;
-			parameter stop = 4'b1000;
+	//Declaramos los 4 estados que tendremos
+	parameter idle = 4'b0001;
+	parameter start = 4'b0010;
+	parameter data = 4'b0100;
+	parameter stop = 4'b1000;
 	
 	//Bandera que me indica que estamos en el bit de stop
 	reg stop_bit = 0;
@@ -55,20 +55,21 @@ module Receiver #(parameter DBIT=8, parameter SB_TICK=16)(s_tick, rx, dout, rx_d
 			dout = 0;*/
 	
 		rx_done_tick = 0;
-		if (s_tick == 1)
-		begin
-	//-------------------------------------------------------------
+		
 	//Asignación síncrona: Actualización del estado y las variables		
-			if(reset == 1) 
-				state = idle;
-			else 
-				begin
-					n_reg = n_next;
-					s_reg = s_next;
-					b_reg = b_next;
-					state = nextState;
-				end
-	//-------------------------------------------------------------			
+		if(reset == 1) 
+			state = idle;
+		else 
+			begin
+				n_reg = n_next;
+				s_reg = s_next;
+				b_reg = b_next;
+				state = nextState;
+			end
+	//-------------------------------------------------------------	
+		
+		if (s_tick == 1)
+		begin		
 			case(state)
 			idle:  //
 				if (rx == 0) 

@@ -435,7 +435,7 @@ module Main_Debug(
 				ledIdle=1;
 				datapathReset=1;
 				datapathOn=0;
-				flagDone=0;
+				//flagDone=0;
 				notStartUartTrans=1;
 				if(uartDataAvailable)begin
 					if(uartFifoDataIn=="c")begin
@@ -459,7 +459,7 @@ module Main_Debug(
 				ledIdle=0;
 				datapathReset=0;
 				nextFifoValue=0;
-				flagDone=0;
+				//flagDone=0;
 				datapathOn=1;
 				if(endOfProgram)
 					next_state=SEND;
@@ -513,7 +513,7 @@ module Main_Debug(
 						notStartUartTrans=1;
 					end
 					else begin
-						flagDone=0;
+						//flagDone=0;
 						notStartUartTrans=0; //Se le dice a la uart que envie
 					end
 				end

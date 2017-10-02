@@ -93,7 +93,6 @@ module Main_Debug(
 //--------------------------------------------Salidas-----------------------------------------//
 		output 	[7:0] 	dataToSend,			// Lo que se envia por UART a la pc. Se envia de a 8 bits
 		output 	reg		nextFifoValue,		// Para que la FIFO me entregue el siguiente valor
-		output 	reg		writeFifoFlag,		// flag para que la FIFO de salida escriba un dato
 		output 	reg 		datapathOn,			// Activa el pipe
 		output 	reg 		datapathReset,		// flag para vaciar el pipe
 		output 				debugRamSrc,		// flag para activar la dirección alternativa en la RAM
@@ -123,7 +122,6 @@ module Main_Debug(
 	initial
 		begin
 			nextFifoValue = 0;
-			writeFifoFlag = 0;
 			datapathOn = 0;
 			datapathReset = 0;
 			ledIdle = 0;
@@ -178,6 +176,7 @@ module Main_Debug(
 	assign data[38] =   EX_MEM_aluOut        [15:8];
 	assign data[39] =   EX_MEM_aluOut        [7:0];
 	assign data[40] =   {7'b0,EX_MEM_regWrite};
+	assign data[41] =   0;
 	assign data[42] =   {4'b0,EX_MEM_memWrite};
 	assign data[43] =   {6'b0,EX_MEM_memReadWidth};
 	assign data[44] =   {3'b0,MEM_WB_writeReg};
@@ -424,7 +423,6 @@ module Main_Debug(
 	always @(*) begin
 		case(current_state)
 			INIT:begin
-				writeFifoFlag=0;
 				nextFifoValue=0;
 				ledIdle=0;
 				datapathReset=1;
@@ -507,7 +505,6 @@ module Main_Debug(
 				else begin
 					// si no terminó de mandar datos hay que volver a SEND
 				   next_state=SEND;
-					writeFifoFlag=1;
 					if(sendCounter>=cantDatos)begin
 						// si ya alcanzó la cantidad máxima de datos
 						// levanta la bandera de que terminó de enviar

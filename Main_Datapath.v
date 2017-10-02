@@ -131,7 +131,6 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	wire [1:0] forwardBEX;
 	 
 	 
-	wire uartWriteFlag;
 	wire uartReadFlag;
 	wire [7:0]uartFifoDataIn;
 	wire uartDataAvailable;
@@ -563,7 +562,6 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		//Salidas
 		.dataToSend(dataToUartOutFifo),
 		.nextFifoValue(uartReadFlag),
-		.writeFifoFlag(uartWriteFlag),
 		.datapathOn(debugEnable),
 		.datapathReset (debugReset),
 		.debugRamSrc(debugRamSrc),

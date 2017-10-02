@@ -61,28 +61,55 @@ module Main_Datapath_Test;
 		clk = 0;
 		clk_70 = 0;
 		reset = 0;
-		uartRxPin = 0;
+		uartRxPin = 1;
 
 		// Wait 100 ns for global reset to finish
 		#100;
 		reset = 1;
 		#180;
 		reset = 0;
+		
 		// Add stimulus here
+		uartRxPin = 1;
+		#99999;
+		
+		#52083.34;
+		uartRxPin = 0;//start bit
+		#52083.34;
+		uartRxPin = 1;
+		#52083.34;
+		uartRxPin = 1;
+		#52083.34;
+		uartRxPin = 0;
+		#52083.34;
+		uartRxPin = 0;
+		#52083.34;
+		uartRxPin = 0;
+		#52083.34;
+		uartRxPin = 1;
+		#52083.34;
+		uartRxPin = 1;
+		#52083.34;
+		uartRxPin = 0;
+		#52083.34;
+		uartRxPin = 1;//stop bit
+		#52083.34;
+		
+		#99999;
 
 	end
    
-	always begin //clock de 100 Mhz como el de la placa
+	always begin //clock de 12.5 Mhz como el de la placa
 			clk = 1'b0;
-			#(100/2) clk = 1'b1;
-			#(100/2);
+			#(80/2) clk = 1'b1;
+			#(80/2);
 	end
 	
-	always begin //clock de 100 Mhz como el de la placa
-			#(70/2)
+	always begin //clock de 12.5 Mhz como el de la placa
+			#(56/2)
 			clk_70 = 1'b0;
-			#(100/2) clk_70 = 1'b1;
-			#(30/2);
+			#(80/2) clk_70 = 1'b1;
+			#(24/2);
 	end 
 	
 endmodule

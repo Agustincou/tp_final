@@ -584,8 +584,8 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.uart_tx_start(~notStartUartTrans),
 		
 		//Salidas
-		.receivedData(), //SE SACA LA VARIABLE "uartFifoDataIn" SOLO PARA TESTEAR SIN UART
-		.dataAvailable(), //SE SACA LA VARIABLE "uartDataAvailable" SOLO PARA TESTEAR SIN UART
+		.receivedData(uartFifoDataIn), //SE SACA LA VARIABLE "uartFifoDataIn" SOLO PARA TESTEAR SIN UART
+		.dataAvailable(uartDataAvailable), //SE SACA LA VARIABLE "uartDataAvailable" SOLO PARA TESTEAR SIN UART
 		.tx(uartTxPin),
 		.uart_tx_done(uartDataSent)
 	);
@@ -714,7 +714,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	//assign debugEnable = uno;
 	//assign debugRamSrc = cero;
 	
-	assign uartFifoDataIn = "c";
-	assign uartDataAvailable = uno;
+	//assign uartFifoDataIn = "c";
+	//assign uartDataAvailable = uno;
 	
 endmodule

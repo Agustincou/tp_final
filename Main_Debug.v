@@ -99,13 +99,18 @@ module Main_Debug(
 		output 	[7:0]		debugMemAddr,	// dirección para leer la memoria desde el debug
 		output 	reg 		ledIdle,			// led del estado IDLE
 		output 	reg 		notStartUartTrans,	// flag para evitar que la UART envíe
-		output 	reg[7:0]	sendCounter,	// cantidad de datos enviados
-		output 	reg 		flagDone			// cuando esta en uno termino de enviar
+		//output 	reg[7:0]	sendCounter,	// cantidad de datos enviados
+		output 	reg 		flagDone,		// cuando esta en uno termino de enviar
+		
+		output	reg[7:0]	contador
     );//POR DEFAULT LOS OUTPUT SON WIRES
 //---------------------------------------------Wires------------------------------------------//
 	// array de datos a enviar para debug
 	wire [7:0] data [246:0];
 //-------------------------------------------Registros----------------------------------------//
+	reg[7:0]	sendCounter;
+	
+	reg continuos_count;
 	reg [2:0] current_state;
 	reg [2:0] next_state;
 	reg restartCounter;
@@ -117,7 +122,7 @@ module Main_Debug(
 							SEND = 4;
 	 
 	//cantidad total de datos a enviar
-	localparam [7:0]cantDatos=8'd247;
+	localparam [7:0]cantDatos=8'd246;
 //-----------------------------------------Inicializacion-------------------------------------//
 	initial
 		begin
@@ -132,6 +137,9 @@ module Main_Debug(
 			current_state = 0;
 			next_state = 0;
 			restartCounter = 0;
+			
+			contador = 0;
+			continuos_count = 0;
 		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
@@ -407,6 +415,7 @@ module Main_Debug(
 		if(reset)begin
 			current_state = INIT ;
 			sendCounter = 0;
+			continuos_count = 0;
 		end
 		else begin
 			current_state = next_state;
@@ -416,7 +425,9 @@ module Main_Debug(
 			if(current_state!=SEND) begin
 				sendCounter = 0;
 			end
-
+			if(current_state==CONTINUOUS) begin
+				continuos_count = 1;
+			end
 		end
 	end
 
@@ -435,10 +446,10 @@ module Main_Debug(
 				ledIdle=1;
 				datapathReset=1;
 				datapathOn=0;
-				//flagDone=0;
+				flagDone=0;
 				notStartUartTrans=1;
 				if(uartDataAvailable)begin
-					if(uartFifoDataIn=="c")begin
+					if(uartFifoDataIn=="c" && continuos_count == 0)begin
 						next_state=CONTINUOUS;
 						datapathReset=0;
 					end
@@ -459,10 +470,12 @@ module Main_Debug(
 				ledIdle=0;
 				datapathReset=0;
 				nextFifoValue=0;
-				//flagDone=0;
+				flagDone=0;
 				datapathOn=1;
-				if(endOfProgram)
+				if(endOfProgram) begin
 					next_state=SEND;
+					contador = contador + 1;
+				end
 				else
 					next_state=CONTINUOUS;
 			end
@@ -505,7 +518,7 @@ module Main_Debug(
 				else begin
 					// si no terminó de mandar datos hay que volver a SEND
 				   next_state=SEND;
-					if(sendCounter>=cantDatos)begin
+					if(sendCounter>=247)begin
 						// si ya alcanzó la cantidad máxima de datos
 						// levanta la bandera de que terminó de enviar
 						// y bloquea la UART
@@ -513,7 +526,7 @@ module Main_Debug(
 						notStartUartTrans=1;
 					end
 					else begin
-						//flagDone=0;
+						flagDone=0;
 						notStartUartTrans=0; //Se le dice a la uart que envie
 					end
 				end

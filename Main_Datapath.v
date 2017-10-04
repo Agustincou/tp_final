@@ -568,7 +568,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.debugMemAddr(debugMemAddr),
 		.ledIdle(ledIdle),
 		.notStartUartTrans(notStartUartTrans),
-		.sendCounter(sendCounter),
+		.contador(sendCounter),
 		.flagDone(sentFlag)
 	 );
 	 

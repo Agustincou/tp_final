@@ -71,7 +71,7 @@ module Clock_tb ();
   // how many cycles to run
   localparam  COUNT_PHASE = 1024;
   // we'll be using the period in many locations
-  localparam time PER1    = 10.000*ONE_NS;
+  localparam time PER1    = 10.0*ONE_NS;
   localparam time PER1_1  = PER1/2;
   localparam time PER1_2  = PER1 - PER1/2;
 
@@ -88,11 +88,11 @@ wire [2:1] CLK_OUT;
 //Freq Check using the M & D values setting and actual Frequency generated
 real period1;
 real ref_period1;
-localparam  ref_period1_clkin1 = (10.000*1*72.000*1000/9.000);
+localparam  ref_period1_clkin1 = (10.0*1*120.000*1000/6.000);
 time prev_rise1;
 real period2;
 real ref_period2;
-localparam  ref_period2_clkin1 = (10.000*1*72*1000/9.000);
+localparam  ref_period2_clkin1 = (10.0*1*120*1000/6.000);
 time prev_rise2;
 
 

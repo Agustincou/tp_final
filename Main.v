@@ -18,13 +18,13 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main(clk, reset, uartRxPin, uartTxPin, ledIdle, sentFlag, notStartUartTx, ledDataAvailable, sendCounter);
+module Main(clk, reset, uartRx, uartTx, ledIdle, sentFlag, notStartUartTx, ledDataAvailable, sendCounter);
 //-------------------------------------------Entradas-----------------------------------------//
 	input clk;
 	input reset;
-	input uartRxPin;
+	input uartRx;
 //--------------------------------------------Salidas-----------------------------------------//
-	output uartTxPin;
+	output uartTx;
 	output ledIdle;
 	output sentFlag;
 	output notStartUartTx;
@@ -48,12 +48,12 @@ module Main(clk, reset, uartRxPin, uartTxPin, ledIdle, sentFlag, notStartUartTx,
 	Main_Datapath datapath( 		
 		//Entradas
 	   .clk(dcmOut),
-		.clk_70(dcmOut70),
+		.clk70(dcmOut70),
 		.reset(reset),
-		.uartRxPin(uartRxPin),
+		.uartRx(uartRx),
 		
 		//Salidas
-		.uartTxPin(uartTxPin),
+		.uartTx(uartTx),
 		.ALUzero(AluZero),
 		.ALUOverflow(ALUOverflow),
 		.ledIdle(ledIdle),

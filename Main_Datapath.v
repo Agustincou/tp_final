@@ -18,15 +18,15 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main_Datapath(clk, clk_70, reset, uartRxPin, 
-							uartTxPin, ALUzero, ALUOverflow, ledIdle, sentFlag, notStartUartTx, ledDataAvailable, sendCounter);
+module Main_Datapath(clk, clk70, reset, uartRx, 
+							uartTx, ALUzero, ALUOverflow, ledIdle, sentFlag, notStartUartTx, ledDataAvailable, sendCounter);
 //-------------------------------------------Entradas-----------------------------------------//
 	input clk;    // clock principal
-	input clk_70; // clock desfasado 70 grados respecto del principal
+	input clk70; // clock desfasado 70 grados respecto del principal
 	input reset;  // reset general
-	input uartRxPin;
+	input uartRx;
 //--------------------------------------------Salidas-----------------------------------------//
-	output uartTxPin;
+	output uartTx;
 	output ALUzero;
 	output ALUOverflow;
 	output ledIdle;
@@ -71,10 +71,10 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	wire branchType;
 	wire jump;
 	 
-	wire eopFlag;
-	wire eopFlagEX;
-	wire eopFlagMEM;
-	wire eopFlagWB;
+	wire endOfProgramFlag;
+	wire endOfProgramFlagEX;
+	wire endOfProgramFlagMEM;
+	wire endOfProgramFlagWB;
 		 
 	wire [1:0] memReadWidth;
 	wire [1:0] memReadWidthEX;
@@ -111,7 +111,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	wire [4:0]rsEX;
 	wire [4:0]rtEX;
 	wire [4:0]rdEX;
-	wire [4:0]saEX;
+	wire [4:0]shamtEX;
 		
 	wire [4:0]writeRegisterMEM;
 	wire [4:0]writeRegisterWB;
@@ -157,53 +157,41 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	
 	wire uartDataSent;
 	wire notStartUartTrans;
-	wire [31:0]readDataFromRegsToDebug0;
-	wire [31:0]readDataFromRegsToDebug1;
-	wire [31:0]readDataFromRegsToDebug2;
-	wire [31:0]readDataFromRegsToDebug3;
-	wire [31:0]readDataFromRegsToDebug4;
-	wire [31:0]readDataFromRegsToDebug5;
-	wire [31:0]readDataFromRegsToDebug6;
-	wire [31:0]readDataFromRegsToDebug7;
-	wire [31:0]readDataFromRegsToDebug8;
-	wire [31:0]readDataFromRegsToDebug9;
-	wire [31:0]readDataFromRegsToDebug10;
-	wire [31:0]readDataFromRegsToDebug11;
-	wire [31:0]readDataFromRegsToDebug12;
-	wire [31:0]readDataFromRegsToDebug13;
-	wire [31:0]readDataFromRegsToDebug14;
-	wire [31:0]readDataFromRegsToDebug15;
-	wire [31:0]readDataFromRegsToDebug16;
-	wire [31:0]readDataFromRegsToDebug17;
-	wire [31:0]readDataFromRegsToDebug18;
-	wire [31:0]readDataFromRegsToDebug19;
-	wire [31:0]readDataFromRegsToDebug20;
-	wire [31:0]readDataFromRegsToDebug21;
-	wire [31:0]readDataFromRegsToDebug22;
-	wire [31:0]readDataFromRegsToDebug23;
-	wire [31:0]readDataFromRegsToDebug24;
-	wire [31:0]readDataFromRegsToDebug25;
-	wire [31:0]readDataFromRegsToDebug26;
-	wire [31:0]readDataFromRegsToDebug27;
-	wire [31:0]readDataFromRegsToDebug28;
-	wire [31:0]readDataFromRegsToDebug29;
-	wire [31:0]readDataFromRegsToDebug30;
-	wire [31:0]readDataFromRegsToDebug31;
+	wire [31:0]regDebug0;
+	wire [31:0]regDebug1;
+	wire [31:0]regDebug2;
+	wire [31:0]regDebug3;
+	wire [31:0]regDebug4;
+	wire [31:0]regDebug5;
+	wire [31:0]regDebug6;
+	wire [31:0]regDebug7;
+	wire [31:0]regDebug8;
+	wire [31:0]regDebug9;
+	wire [31:0]regDebug10;
+	wire [31:0]regDebug11;
+	wire [31:0]regDebug12;
+	wire [31:0]regDebug13;
+	wire [31:0]regDebug14;
+	wire [31:0]regDebug15;
+	wire [31:0]regDebug16;
+	wire [31:0]regDebug17;
+	wire [31:0]regDebug18;
+	wire [31:0]regDebug19;
+	wire [31:0]regDebug20;
+	wire [31:0]regDebug21;
+	wire [31:0]regDebug22;
+	wire [31:0]regDebug23;
+	wire [31:0]regDebug24;
+	wire [31:0]regDebug25;
+	wire [31:0]regDebug26;
+	wire [31:0]regDebug27;
+	wire [31:0]regDebug28;
+	wire [31:0]regDebug29;
+	wire [31:0]regDebug30;
+	wire [31:0]regDebug31;
 	
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
-	/* NO SE PUEDEN INICIALIZAR PORQUE NO SON REG
-	initial begin
-		uartTxPin = 0;
-		ALUzero = 0;
-		ALUOverflow = 0;
-		ledIdle = 0;
-		sentFlag = 0;			// bit de dato enviado en la unidad de debug
-		notStartUartTx = 0;		// bit de frenado de la UART desde la unidad de debug	
-		ledDataAvailable = 0;	// bit de dato disponible para lectura en la unidad de debug
-		sendCounter = b7'0000000;	// contador de la unidad de debug
-	end
-	*/
 //--------------------------------------Declaracion de Bloques--------------------------------//
 	Main_Control unit_control(
 		//Entradas
@@ -222,9 +210,9 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.RegWrite(regWrite),
 		.LoadImm(loadImm),
 		.ZeroEx(zeroExtendFlag),
-		.EOP(eopFlag),
+		.EOP(endOfProgramFlag),
 		.memReadWidth(memReadWidth), // 0:Palabra completa 1:Media palabra 2:Byte
-	    .aluControlCU(aluControl)
+	   .aluControlCU(aluControl)
 	 );
 	 
 	DataMemory ram(
@@ -241,7 +229,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	  .douta(instruction)
 	);
 
-	 Register_File bank(
+	 Register_File reg_bank(
 		//Entradas
 		.clk(clk),
 		.wr_enable3(regWriteWB),
@@ -254,38 +242,38 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		//Salidas
 		.read_data1(readData1),
 		.read_data2(readData2),
-		.read_data_to_debug_0(readDataFromRegsToDebug0),
-		.read_data_to_debug_1(readDataFromRegsToDebug1),
-		.read_data_to_debug_2(readDataFromRegsToDebug2),
-		.read_data_to_debug_3(readDataFromRegsToDebug3),
-		.read_data_to_debug_4(readDataFromRegsToDebug4),
-		.read_data_to_debug_5(readDataFromRegsToDebug5),
-		.read_data_to_debug_6(readDataFromRegsToDebug6),
-		.read_data_to_debug_7(readDataFromRegsToDebug7),
-		.read_data_to_debug_8(readDataFromRegsToDebug8),
-		.read_data_to_debug_9(readDataFromRegsToDebug9),
-		.read_data_to_debug_10(readDataFromRegsToDebug10),
-		.read_data_to_debug_11(readDataFromRegsToDebug11),
-		.read_data_to_debug_12(readDataFromRegsToDebug12),
-		.read_data_to_debug_13(readDataFromRegsToDebug13),
-		.read_data_to_debug_14(readDataFromRegsToDebug14),
-		.read_data_to_debug_15(readDataFromRegsToDebug15),
-		.read_data_to_debug_16(readDataFromRegsToDebug16),
-		.read_data_to_debug_17(readDataFromRegsToDebug17),
-		.read_data_to_debug_18(readDataFromRegsToDebug18),
-		.read_data_to_debug_19(readDataFromRegsToDebug19),
-		.read_data_to_debug_20(readDataFromRegsToDebug20),
-		.read_data_to_debug_21(readDataFromRegsToDebug21),
-		.read_data_to_debug_22(readDataFromRegsToDebug22),
-		.read_data_to_debug_23(readDataFromRegsToDebug23),
-		.read_data_to_debug_24(readDataFromRegsToDebug24),
-		.read_data_to_debug_25(readDataFromRegsToDebug25),
-		.read_data_to_debug_26(readDataFromRegsToDebug26),
-		.read_data_to_debug_27(readDataFromRegsToDebug27),
-		.read_data_to_debug_28(readDataFromRegsToDebug28),
-		.read_data_to_debug_29(readDataFromRegsToDebug29),
-		.read_data_to_debug_30(readDataFromRegsToDebug30),
-		.read_data_to_debug_31(readDataFromRegsToDebug31)
+		.read_data_to_debug_0(regDebug0),
+		.read_data_to_debug_1(regDebug1),
+		.read_data_to_debug_2(regDebug2),
+		.read_data_to_debug_3(regDebug3),
+		.read_data_to_debug_4(regDebug4),
+		.read_data_to_debug_5(regDebug5),
+		.read_data_to_debug_6(regDebug6),
+		.read_data_to_debug_7(regDebug7),
+		.read_data_to_debug_8(regDebug8),
+		.read_data_to_debug_9(regDebug9),
+		.read_data_to_debug_10(regDebug10),
+		.read_data_to_debug_11(regDebug11),
+		.read_data_to_debug_12(regDebug12),
+		.read_data_to_debug_13(regDebug13),
+		.read_data_to_debug_14(regDebug14),
+		.read_data_to_debug_15(regDebug15),
+		.read_data_to_debug_16(regDebug16),
+		.read_data_to_debug_17(regDebug17),
+		.read_data_to_debug_18(regDebug18),
+		.read_data_to_debug_19(regDebug19),
+		.read_data_to_debug_20(regDebug20),
+		.read_data_to_debug_21(regDebug21),
+		.read_data_to_debug_22(regDebug22),
+		.read_data_to_debug_23(regDebug23),
+		.read_data_to_debug_24(regDebug24),
+		.read_data_to_debug_25(regDebug25),
+		.read_data_to_debug_26(regDebug26),
+		.read_data_to_debug_27(regDebug27),
+		.read_data_to_debug_28(regDebug28),
+		.read_data_to_debug_29(regDebug29),
+		.read_data_to_debug_30(regDebug30),
+		.read_data_to_debug_31(regDebug31)
 	 );
 	 
 	 ALU alu(
@@ -367,7 +355,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.memToReg_in(memToReg),
 		.memReadWidth_in(memReadWidth),
 		.regWrite_in(regWrite),
-		.eop_in(eopFlag),
+		.eop_in(endOfProgramFlag),
 
 		//Salidas
 		.aluControl_out(aluControlEX),
@@ -382,11 +370,11 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.rs_out(rsEX),
 		.rt_out(rtEX),
 		.rd_out(rdEX),
-		.sa_out(saEX),
+		.sa_out(shamtEX),
 		.regDst_out(regDstEX),
 		.loadImm_out(loadImmEX),
 		.regWrite_out(regWriteEX),
-		.eop_out(eopFlagEX)			
+		.eop_out(endOfProgramFlagEX)			
     );	
 			
 	EX_MEM ex_mem(
@@ -402,7 +390,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.memToReg_in(memToRegEX),
 		.memWrite_in(memWriteEX),
 		.memReadWidth_in(memReadWidthEX),
-		.eop_in(eopFlagEX),
+		.eop_in(endOfProgramFlagEX),
 		
 		//Salidas
 		.writeReg_out(writeRegisterMEM),
@@ -412,7 +400,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.memToReg_out(memToRegMEM),
 		.memWrite_out(memWriteMEM),
 		.memReadWidth_out(memReadWidthMEM),
-		.eop_out(eopFlagMEM)
+		.eop_out(endOfProgramFlagMEM)
 	);			
 	 
 	 MemoryLoadMask mask (
@@ -435,7 +423,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.readData_in(readDataMemoryMasked),
 		.regWrite_in(regWriteMEM),
 		.memToReg_in(memToRegMEM),
-		.eop_in(eopFlagMEM),
+		.eop_in(endOfProgramFlagMEM),
 		
 		//Salidas
 		.writeReg_out(writeRegisterWB),
@@ -443,7 +431,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.readData_out(memoryOutWB),
 		.regWrite_out(regWriteWB),
 		.memToReg_out(memToRegWB),
-		.eop_out(eopFlagWB)
+		.eop_out(endOfProgramFlagWB)
     );
 	 
 	 
@@ -488,9 +476,9 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	 
 	 Main_Debug debugUnit(
 		//Entradas
-		.clock(clk_70),
+		.clock(clk70),
 		.reset(reset),
-		.endOfProgram(eopFlagWB),
+		.endOfProgram(endOfProgramFlagWB),
 		.uartFifoDataIn(uartFifoDataIn),
 		.uartDataAvailable(uartDataAvailable),
 		.uartDataSent(uartDataSent),
@@ -509,7 +497,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.ID_EX_rs(rsEX),
 		.ID_EX_rt(rtEX),
 		.ID_EX_rd(rdEX),
-		.ID_EX_sa(saEX),
+		.ID_EX_sa(shamtEX),
 		.ID_EX_regDst(regDstEX),
 		.ID_EX_loadImm(loadImmEX),
 		.ID_EX_regWrite(regWriteEX),
@@ -525,38 +513,38 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.MEM_WB_readData(memoryOutWB),
 		.MEM_WB_regWrite(regWriteWB),
 		.MEM_WB_memToReg(memToRegWB),
-		.reg0(readDataFromRegsToDebug0),
-		.reg1(readDataFromRegsToDebug1),
-		.reg2(readDataFromRegsToDebug2),
-		.reg3(readDataFromRegsToDebug3),
-		.reg4(readDataFromRegsToDebug4),
-		.reg5(readDataFromRegsToDebug5),
-		.reg6(readDataFromRegsToDebug6),
-		.reg7(readDataFromRegsToDebug7),
-		.reg8(readDataFromRegsToDebug8),
-		.reg9(readDataFromRegsToDebug9),
-		.reg10(readDataFromRegsToDebug10),
-		.reg11(readDataFromRegsToDebug11),
-		.reg12(readDataFromRegsToDebug12),
-		.reg13(readDataFromRegsToDebug13),
-		.reg14(readDataFromRegsToDebug14),
-		.reg15(readDataFromRegsToDebug15),
-		.reg16(readDataFromRegsToDebug16),
-		.reg17(readDataFromRegsToDebug17),
-		.reg18(readDataFromRegsToDebug18),
-		.reg19(readDataFromRegsToDebug19),
-		.reg20(readDataFromRegsToDebug20),
-		.reg21(readDataFromRegsToDebug21),
-		.reg22(readDataFromRegsToDebug22),
-		.reg23(readDataFromRegsToDebug23),
-		.reg24(readDataFromRegsToDebug24),
-		.reg25(readDataFromRegsToDebug25),
-		.reg26(readDataFromRegsToDebug26),
-		.reg27(readDataFromRegsToDebug27),
-		.reg28(readDataFromRegsToDebug28),
-		.reg29(readDataFromRegsToDebug29),
-		.reg30(readDataFromRegsToDebug30),
-		.reg31(readDataFromRegsToDebug31),
+		.reg0(regDebug0),
+		.reg1(regDebug1),
+		.reg2(regDebug2),
+		.reg3(regDebug3),
+		.reg4(regDebug4),
+		.reg5(regDebug5),
+		.reg6(regDebug6),
+		.reg7(regDebug7),
+		.reg8(regDebug8),
+		.reg9(regDebug9),
+		.reg10(regDebug10),
+		.reg11(regDebug11),
+		.reg12(regDebug12),
+		.reg13(regDebug13),
+		.reg14(regDebug14),
+		.reg15(regDebug15),
+		.reg16(regDebug16),
+		.reg17(regDebug17),
+		.reg18(regDebug18),
+		.reg19(regDebug19),
+		.reg20(regDebug20),
+		.reg21(regDebug21),
+		.reg22(regDebug22),
+		.reg23(regDebug23),
+		.reg24(regDebug24),
+		.reg25(regDebug25),
+		.reg26(regDebug26),
+		.reg27(regDebug27),
+		.reg28(regDebug28),
+		.reg29(regDebug29),
+		.reg30(regDebug30),
+		.reg31(regDebug31),
 		.memoryRamData(readDataMemory),
 		
 		//Salidas
@@ -568,70 +556,70 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.debugMemAddr(debugMemAddr),
 		.ledIdle(ledIdle),
 		.notStartUartTrans(notStartUartTrans),
-		.contador(sendCounter),
+		.sendCounter(sendCounter),
 		.flagDone(sentFlag)
 	 );
 	 
 	Main_Uart uartMod(
 		//Entradas
-		.clk(clk_70),
-		.rx(uartRxPin),
+		.clk(clk70),
+		.rx(uartRx),
 		.uart_reset(reset),
 		.readFlag(uartReadFlag),
 		.dataToSend(dataToUartOutFifo),
 		.uart_tx_start(~notStartUartTrans),
 		
 		//Salidas
-		.receivedData(uartFifoDataIn), //SE SACA LA VARIABLE "uartFifoDataIn" SOLO PARA TESTEAR SIN UART
-		.dataAvailable(uartDataAvailable), //SE SACA LA VARIABLE "uartDataAvailable" SOLO PARA TESTEAR SIN UART
-		.tx(uartTxPin),
+		.receivedData(uartFifoDataIn),
+		.dataAvailable(uartDataAvailable),
+		.tx(uartTx),
 		.uart_tx_done(uartDataSent)
 	);
 	
-	Mux_2in_1out #(5) mux(
+	Mux_2in_1out #(5) registerWriteMux(
 		.DatoA(rtEX),
 		.DatoB(rdEX),
 		.Sel(regDstEX),
 		.Salida(writeRegister)
 	);
 	
-	Mux_3in_1out mux2(
+	Mux_3in_1out regOrImmSelectorMux(
 		.DatoA(srcAEX),
-		.DatoB(saEX),
+		.DatoB(shamtEX),
 		.DatoC('d16),
 		.Sel((loadImmEX)? 'd2 : aluShiftImmEX),
 		.Salida(aluOperand1)
 	);
 	
-	Mux_2in_1out mux3(
+	Mux_2in_1out aluSourceSelectorMux(
 		.DatoA(srcBEX),
 		.DatoB(sigExtEX),
 		.Sel(aluSrcEX),
 		.Salida(aluOperand2)
 	);
 	
-	Mux_2in_1out #(1) mux4(
+	Mux_2in_1out #(1) programCounterMux(
 		.DatoA(branch & branchTaken),
 		.DatoB(1),
 		.Sel(jump),
 		.Salida(pcSrc)
 	);
 	
-	Mux_2in_1out #(1) mux5(
+	Mux_2in_1out #(1) branchTakenMux(
 		.DatoA(branchSrcA == branchSrcB),
 		.DatoB(branchSrcA != branchSrcB),
 		.Sel(branchType),
 		.Salida(branchTaken)
 	);
 	
-	Mux_2in_1out mux6(
+	Mux_2in_1out memToRegMux(
 		.DatoA(aluOutWB),
 		.DatoB(memoryOutWB),
 		.Sel(memToRegWB),
 		.Salida(resultWB)
 	);
 	
-	Mux_3in_1out #(8) mux7(
+	Mux_3in_1out #(8) programCounterAddressMux(
 		.DatoA(pcNext),
 		.DatoB(pcBranchAddr),
 		.DatoC(pcBranchAddr),
@@ -639,21 +627,21 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.Salida(PC)
 	);
 	
-	Mux_2in_1out #(4) mux8(
+	Mux_2in_1out #(4) writeInRamSelectorMux(
 		.DatoA(memWriteMEM),
 		.DatoB(4'b0),
 		.Sel(debugRamSrc),
 		.Salida(WEA)
 	);
 	
-	Mux_2in_1out #(8) mux9(
+	Mux_2in_1out #(8) ramDataAddressMux(
 		.DatoA(aluOutMEM[7:0]),
 		.DatoB(debugMemAddr),
 		.Sel(debugRamSrc),
 		.Salida(ramDataAddr)
 	);
 	
-	Mux_3in_1out mux10(
+	Mux_3in_1out srcASelectorMux(
 		.DatoA(readData1EX),
 		.DatoB(resultWB),
 		.DatoC(aluOutMEM),
@@ -661,7 +649,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.Salida(srcAEX)
 	);
 	
-	Mux_3in_1out mux11(
+	Mux_3in_1out srcBSelectorMux(
 		.DatoA(readData2EX),
 		.DatoB(resultWB),
 		.DatoC(aluOutMEM),
@@ -669,14 +657,14 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.Salida(srcBEX)
 	);
 	
-	Mux_2in_1out mux12(
+	Mux_2in_1out branchSrcASelectorMux(
 		.DatoA(readData1),
 		.DatoB(aluOutMEM),
 		.Sel(forwardAID),
 		.Salida(branchSrcA)
 	);
 	
-	Mux_2in_1out mux13(
+	Mux_2in_1out branchSrcBSelectorMux(
 		.DatoA(readData2),
 		.DatoB(aluOutMEM),
 		.Sel(forwardBID),
@@ -686,33 +674,7 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	assign ALUzero=aluZero;
 	assign ALUOverflow=aluOverflow;
 	assign ledDataAvailable=uartDataAvailable;
-	
 	assign notStartUartTx = notStartUartTrans;		
-	//mux  -> assign writeRegister = (regDstEX)? rdEX : rtEX;
-	//mux2 -> assign aluOperand1 = (loadImmEX)? 'd16 : ((aluShiftImmEX)? saEX: srcAEX);
-	//mux3 -> assign aluOperand2 = (aluSrcEX)? sigExtEX: srcBEX;
-	//mux4 -> assign pcSrc = (jump) ? 1 : (branch & branchTaken);
-	//mux5 -> assign branchTaken = (branchType)? (branchSrcA!=branchSrcB) : (branchSrcA==branchSrcB); //branchType(flag from control) 1: check if branch NE 0: check if branch EQ
-	//mux6 -> assign resultWB = (memToRegWB)? memoryOutWB : aluOutWB;
-	//mux7 -> assign PC = (jump) ? pcBranchAddr : (pcSrc) ? pcBranchAddr : pcNext;
-	
-	// si se activa el debug de la RAM se activan todos los bytes
-	//mux8 -> assign WEA = (debugRamSrc)? 4'b0: memWriteMEM;
-	// si se activa el debug de la RAM se utiliza la dirección alternativa
-	//mux9 -> assign ramDataAddr = (debugRamSrc)? debugMemAddr: aluOutMEM[7:0];
-	
-	//mux10 -> assign srcAEX= (forwardAEX==0)? readData1EX : ((forwardAEX==1)? resultWB : aluOutMEM);
-	//mux11 -> assign srcBEX= (forwardBEX==0)? readData2EX : ((forwardBEX==1)? resultWB : aluOutMEM);
 	assign writeDataEX = srcBEX;
-	//mux12 -> assign branchSrcA= (forwardAID)? aluOutMEM: readData1;
-	//mux13 -> assign branchSrcB= (forwardBID)? aluOutMEM: readData2;
-	
-	reg uno = 1;
-	reg cero = 0;
-	//assign debugEnable = uno;
-	//assign debugRamSrc = cero;
-	
-	//assign uartFifoDataIn = "c";
-	//assign uartDataAvailable = uno;
-	
+
 endmodule

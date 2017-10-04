@@ -99,16 +99,13 @@ module Main_Debug(
 		output 	[7:0]		debugMemAddr,	// dirección para leer la memoria desde el debug
 		output 	reg 		ledIdle,			// led del estado IDLE
 		output 	reg 		notStartUartTrans,	// flag para evitar que la UART envíe
-		//output 	reg[7:0]	sendCounter,	// cantidad de datos enviados
-		output 	reg 		flagDone,		// cuando esta en uno termino de enviar
-		
-		output	reg[7:0]	contador
+		output 	reg[7:0]	sendCounter,	// cantidad de datos enviados
+		output 	reg 		flagDone		// cuando esta en uno termino de enviar
     );//POR DEFAULT LOS OUTPUT SON WIRES
 //---------------------------------------------Wires------------------------------------------//
 	// array de datos a enviar para debug
 	wire [7:0] data [246:0];
 //-------------------------------------------Registros----------------------------------------//
-	reg[7:0]	sendCounter;
 	
 	reg continuos_count;
 	reg [2:0] current_state;
@@ -138,7 +135,6 @@ module Main_Debug(
 			next_state = 0;
 			restartCounter = 0;
 			
-			contador = 0;
 			continuos_count = 0;
 		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
@@ -474,7 +470,6 @@ module Main_Debug(
 				datapathOn=1;
 				if(endOfProgram) begin
 					next_state=SEND;
-					contador = contador + 1;
 				end
 				else
 					next_state=CONTINUOUS;

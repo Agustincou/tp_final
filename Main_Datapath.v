@@ -131,7 +131,6 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	wire [1:0] forwardBEX;
 	 
 	 
-	wire uartWriteFlag;
 	wire uartReadFlag;
 	wire [7:0]uartFifoDataIn;
 	wire uartDataAvailable;
@@ -487,11 +486,10 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		.forwardBEX(forwardBEX)
 	 );
 	 
-	 /*
-	 DebugUnit debugUnit(
+	 Main_Debug debugUnit(
 		//Entradas
-		.clock(clock70),
-		.reset(resetGral),
+		.clock(clk_70),
+		.reset(reset),
 		.endOfProgram(eopFlagWB),
 		.uartFifoDataIn(uartFifoDataIn),
 		.uartDataAvailable(uartDataAvailable),
@@ -564,36 +562,31 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 		//Salidas
 		.dataToSend(dataToUartOutFifo),
 		.nextFifoValue(uartReadFlag),
-		.writeFifoFlag(uartWriteFlag),
 		.datapathOn(debugEnable),
 		.datapathReset (debugReset),
 		.debugRamSrc(debugRamSrc),
 		.debugMemAddr(debugMemAddr),
 		.ledIdle(ledIdle),
 		.notStartUartTrans(notStartUartTrans),
-		.sendCounter(sendCounter),
+		.contador(sendCounter),
 		.flagDone(sentFlag)
 	 );
-	 */
 	 
-	/*
-	UART uartMod(
+	Main_Uart uartMod(
 		//Entradas
-		.clock(clock70),
-		.uart_rx(uartRxPin),
-		.uart_reset(resetGral),
+		.clk(clk_70),
+		.rx(uartRxPin),
+		.uart_reset(reset),
 		.readFlag(uartReadFlag),
-		.writeFlag(uartWriteFlag),
 		.dataToSend(dataToUartOutFifo),
-		.uart_tx_start(notStartUartTrans),
+		.uart_tx_start(~notStartUartTrans),
 		
 		//Salidas
-		.receivedData(uartFifoDataIn),
-		.dataAvailable(uartDataAvailable),
-		.uart_tx(uartTxPin),
+		.receivedData(uartFifoDataIn), //SE SACA LA VARIABLE "uartFifoDataIn" SOLO PARA TESTEAR SIN UART
+		.dataAvailable(uartDataAvailable), //SE SACA LA VARIABLE "uartDataAvailable" SOLO PARA TESTEAR SIN UART
+		.tx(uartTxPin),
 		.uart_tx_done(uartDataSent)
 	);
-	*/
 	
 	Mux_2in_1out #(5) mux(
 		.DatoA(rtEX),
@@ -716,7 +709,10 @@ module Main_Datapath(clk, clk_70, reset, uartRxPin,
 	
 	reg uno = 1;
 	reg cero = 0;
-	assign debugEnable = uno;
-	assign debugRamSrc = cero;
+	//assign debugEnable = uno;
+	//assign debugRamSrc = cero;
+	
+	//assign uartFifoDataIn = "c";
+	//assign uartDataAvailable = uno;
 	
 endmodule

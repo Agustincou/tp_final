@@ -71,7 +71,7 @@ module Clock_tb ();
   // how many cycles to run
   localparam  COUNT_PHASE = 1024;
   // we'll be using the period in many locations
-  localparam time PER1    = 10.000*ONE_NS;
+  localparam time PER1    = 10.0*ONE_NS;
   localparam time PER1_1  = PER1/2;
   localparam time PER1_2  = PER1 - PER1/2;
 
@@ -86,6 +86,14 @@ module Clock_tb ();
   reg         COUNTER_RESET = 0;
 wire [2:1] CLK_OUT;
 //Freq Check using the M & D values setting and actual Frequency generated
+real period1;
+real ref_period1;
+localparam  ref_period1_clkin1 = (10.0*1*120.000*1000/6.000);
+time prev_rise1;
+real period2;
+real ref_period2;
+localparam  ref_period2_clkin1 = (10.0*1*120*1000/6.000);
+time prev_rise2;
 
 
   // Input clock generation
@@ -114,6 +122,14 @@ wire [2:1] CLK_OUT;
 
     test_phase = "counting";
     #(PER1*COUNT_PHASE);
+    if ((period1 -ref_period1_clkin1) <= 100 && (period1 -ref_period1_clkin1) >= -100) begin
+    $display("Freq of CLK_OUT[1] ( in MHz ) : %0f\n", 1000000/period1);
+    end else 
+    $display("ERROR: Freq of CLK_OUT[1] is not correct"); 
+    if ((period2 -ref_period2_clkin1) <= 100 && (period2 -ref_period2_clkin1) >= -100) begin
+    $display("Freq of CLK_OUT[2] ( in MHz ) : %0f\n", 1000000/period2);
+    end else 
+    $display("ERROR: Freq of CLK_OUT[2] is not correct"); 
 
     $display("SIMULATION PASSED");
     $display("SYSTEM_CLOCK_COUNTER : %0d\n",$time/PER1);
@@ -139,5 +155,23 @@ wire [2:1] CLK_OUT;
     .LOCKED             (LOCKED));
 
 // Freq Check 
+initial
+  prev_rise1 = 0;
+
+always @(posedge CLK_OUT[1])
+begin
+  if (prev_rise1 != 0)
+    period1 = $time - prev_rise1;
+  prev_rise1 = $time;
+end
+initial
+  prev_rise2 = 0;
+
+always @(posedge CLK_OUT[2])
+begin
+  if (prev_rise2 != 0)
+    period2 = $time - prev_rise2;
+  prev_rise2 = $time;
+end
 
 endmodule

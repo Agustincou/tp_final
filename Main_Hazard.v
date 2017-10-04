@@ -19,7 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module Main_Hazard(branchID, rsID, rtID, rsEX, rtEX, writeRegEX, writeRegMEM, writeRegWB, memToRegEX, memToRegMEM,
-						writeRegWB, memToRegEX, memToRegMEM, regWriteEX, regWriteMEM, regWriteWB, stallFE, stallID,
+						regWriteEX, regWriteMEM, regWriteWB, stallFE, stallID,
 						forwardAID, forwardBID, flushEX, forwardAEX, forwardBEX);
 //-------------------------------------------Entradas-----------------------------------------//
 	input branchID;

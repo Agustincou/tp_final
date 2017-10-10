@@ -76,12 +76,20 @@ class Translator(object):
             END instruction has no params, so it won't have any whitespaces and split would crash
             '''
             return {"instruction_name":instruction, "params":[]}
+        #Obtenemos el nombre de la instruccion, y sus parametros
         (instrCode, instrParams) = split(instruction, " ", 1)
+        #Pasamos el nombre de la instruccion a mayusculas
         instrCode = instrCode.upper()
+        #Obtenemos los nombres de los campos correspondiente a la instruccion, como ser rs, rt, offset, base, innmediate, etc.
         fieldNames = [fn[0] for fn in ASM2HEX[instrCode]][1:]
+        #Eliminamos parentesis y separamos valores por coma
         fieldValuesAux = [split(instrParam.strip().strip(")"),"(") for instrParam in split(instrParams,",")]
+        #Obtenemos los valores para cada campo
         fieldValues = list(chain.from_iterable(fieldValuesAux))
+        #Eliminamos espacios en blanco
         fieldValues = [fv for fv in fieldValues if fv]
+        #Retornamos la instruccion en forma de mapa, indicando nombre, nombre de parametro y valor del parametro. EJ:
+        #{'instruction_name': 'ADDI', 'params': [('rt', '9'), ('rs', '9'), ('immediate', '5')]}
         return {"instruction_name":instrCode, "params":[(fieldNames[i], fieldValues[i]) for i in range(len(fieldNames))]}
         
         
@@ -91,7 +99,9 @@ class Translator(object):
         @return: a list of code lines in string format
         '''
         if not (isinstance(text, str)): raise TypeError   #if text is not a string the method will fail and exit
+        #Convertimos el texto como viene, en un mapa con cada una de las instrucciones
         code = [split(line, ";")[0].strip() for line in split(text,"\n")]   #splits the string into lines and then takes the part behind the first ; occurrence
+        #Elimina lineas vacias
         code = [l for l in code if l]    #removes empty lines and only comment lines
         return code
         
@@ -101,20 +111,37 @@ class Translator(object):
         @return: a translation to hex codified lines in list of strings format
         '''
         if not isinstance(code, str): raise TypeError
+        #Obtenemos mapa con las instrucciones
         codeLines = self.getInstructionsListFromText(code)
+        #Por cada instruccion en el mapa codeLines, se llama a la funcion getFieldsFromInstruction para obtener mapas de cada instruccion que 
+        #indican nombre, nombre de parametro, y valor de ese parametro.
         decodedInstructions = [self.getFieldsFromInstruction(instruction) for instruction in codeLines]
+        #Por lo tanto, tenemos en decodecInstructions, una lista, donde cada valor es el mapa obtenido arriba.
         resultCodes = list()
         for instruction in decodedInstructions:
+            #Obtenemos el OpCode en base al nombre de la instruccion. EJ:
+            #[('code', 536870912), ('rt', 16), ('rs', 21), ('immediate', 0)]
             instructionData = ASM2HEX[instruction["instruction_name"]]
+            #Lista de los parametros. EJ:
+            #[('rt', '9'), ('rs', '9'), ('immediate', '5')]
             instructionParams = instruction["params"]   # list of tuples of instruction parameters
             argumentsCode = 0;
             if instructionParams: #list not empty
+                #Obtenemos el valor de cada parametro, segun el desplazamiento para que quede en la posicion indicada. EJ.
+                # [589824, 18874368, 5]
                 argumentValues = [(int(instructionParams[i][1]) << instructionData[i+1][1]) for i in range(len(instructionParams))]
+                #Convertimos todos los parametros a un solo valor mediante una operacion del tipo OR. EJ:
+                #19464197
                 argumentsCode = reduce(lambda x, y: x | y,argumentValues)
+            #Obtenemos toda la instruccion haciendo una OR entre el OPCode y los valores de los parametros
             instructionCode = int(instructionData[0][1]) | argumentsCode
+            #Convertimos la instruccion a Hexadecimal
             instrCodeHex = hex(instructionCode).strip("L")[2:]
+            #Si es menor a 8 caracteres, le sumamos un 0, para que quede standard
             while len(instrCodeHex) < 8:
                 instrCodeHex = '0'+instrCodeHex
+            #La sumamos a una lista
             resultCodes += [instrCodeHex]
         
+        #Retornamos la lista con los valores en hexa
         return resultCodes

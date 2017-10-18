@@ -1,5 +1,3 @@
-import os
-
 def concat(fro, size, decimal):
 	salida = ""
 	for i in range(fro, fro+size):
@@ -26,9 +24,16 @@ binarios = contenido.split(' ')
 decimal = True
 
 #---------------------------------------------------------
+print "PC COUNTER"
 print "FE_pc / pcFE: " + str(concat(0,1,decimal))
-print "IF_ID_instr / instrID: " + str(concat(1,4,decimal))
+print ""
+
+print "LATCH IF-ID"
+print "IF_ID_instr / instrID: " + str(hex(concat(1,4,decimal)))[2:]
 print "IF_ID_pcNext / pcNextID: " + str(concat(5,1,decimal))
+print ""
+
+print "LATCH ID-EX"
 print "ID_EX_aluControl / aluControlEX: " + str(concat(6,1,decimal))
 print "ID_EX_signImm / SigExtEX: " + str(concat(7,4,decimal))
 print "ID_EX_readData1 / readData1EX: " + str(concat(11,4,decimal))
@@ -45,18 +50,26 @@ print "ID_EX_sa / shamtEX: " + str(concat(27,1,decimal))
 print "ID_EX_regDst / regDstEX: " + str(concat(28,1,decimal))
 print "ID_EX_loadImm / loadImmEX: " + str(concat(29,1,decimal))
 print "ID_EX_regWrite / regWriteEX: " + str(concat(30,1,decimal))
+print ""
+
+print "LATCH EX-MEM"
 print "EX_MEM_writeReg / writeRegisterMEM: " + str(concat(31,1,decimal))
 print "EX_MEM_writeData / writeDataMEM: " + str(concat(32,4,decimal))
 print "EX_MEM_aluOut / aluOutMEM: " + str(concat(36,4,decimal))
 print "EX_MEM_regWrite / regWriteMEM: " + str(concat(40,1,decimal))
-print "41 AL PEDO: " + str(concat(41,1,decimal))
 print "EX_MEM_memWrite / memWriteMEM: " + str(concat(42,1,decimal))
 print "EX_MEM_memReadWidth / memReadWidthMEM: " + str(concat(43,1,decimal))
+print ""
+
+print "LATCH MEM-WB"
 print "MEM_WB_writeReg / writeRegisterWB: " + str(concat(44,1,decimal))
 print "MEM_WB_aluOut / aluOutWB: " + str(concat(45,4,decimal))
 print "MEM_WB_readData / memoryOutWB: " + str(concat(49,4,decimal))
 print "MEM_WB_regWrite / regWriteWB: " + str(concat(53,1,decimal))
 print "MEM_WB_memToReg / memToRegWB: " + str(concat(54,1,decimal))
+print ""
+
+print "REGISTROS"
 print "reg0: " + str(concat(55,4,decimal))
 print "reg1: " + str(concat(59,4,decimal))
 print "reg2: " + str(concat(63,4,decimal))
@@ -89,6 +102,9 @@ print "reg28: " + str(concat(167,4,decimal))
 print "reg29: " + str(concat(171,4,decimal))
 print "reg30: " + str(concat(175,4,decimal))
 print "reg31: " + str(concat(179,4,decimal))
+print ""
+
+print "MEMORIA RAM"
 print "memoryRamData[0]: " + str(concat(183,4,decimal))
 print "memoryRamData[1]: " + str(concat(187,4,decimal))
 print "memoryRamData[2]: " + str(concat(191,4,decimal))

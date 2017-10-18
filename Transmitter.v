@@ -45,17 +45,19 @@ module Transmitter #(parameter DBIT=8, parameter SB_TICK=16)(s_tick, tx, din, tx
 	
    always @(posedge clk)
 	begin
-		tx_done_tick = 0;
+		tx_done_tick <= 0;
 		//------------------------------------------------------------
 		// Asignación síncrona: Actualización del estado y las variables	
 		if(reset == 1) 
 			state = idle;
 		else 
 			begin
+				if (state == stop && nextState == idle) begin
+					tx_done_tick <= 1; //Para enviar un pulso y leer el dato de la fifo. (Durara un solo ciclo de s_tick)
+				end
 				n_reg = n_next;
 				s_reg = s_next;
 				b_reg = b_next;
-				tx_done_tick = 0;
 				state = nextState;
 			end
 		//------------------------------------------------------------
@@ -68,7 +70,6 @@ module Transmitter #(parameter DBIT=8, parameter SB_TICK=16)(s_tick, tx, din, tx
 				if (tx_start == 1)
 					begin
 						s_next = 0;
-						tx_done_tick = 1; //Para enviar un pulso y leer el dato de la fifo. (Durara un solo ciclo de s_tick)
 						nextState = start;
 					end
 				else

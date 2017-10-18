@@ -14,8 +14,8 @@ NET "notStartUartTx" LOC = V14;
 NET "sendCounter[7]" LOC = H17;
 NET "reset" LOC = N17;
 NET "sentFlag" LOC = V15;
-NET "uartRxPin" LOC = C4;
-NET "uartTxPin" LOC = D4;
+NET "uartRx" LOC = C4;
+NET "uartTx" LOC = D4;
 
 # PlanAhead Generated IO constraints 
 
@@ -33,5 +33,5 @@ NET "ledDataAvailable" IOSTANDARD = LVCMOS18;
 NET "notStartUartTx" IOSTANDARD = LVCMOS18;
 NET "reset" IOSTANDARD = LVCMOS18;
 NET "sentFlag" IOSTANDARD = LVCMOS18;
-NET "uartRxPin" IOSTANDARD = LVCMOS18;
-NET "uartTxPin" IOSTANDARD = LVCMOS18;
+NET "uartRx" IOSTANDARD = LVCMOS18;
+NET "uartTx" IOSTANDARD = LVCMOS18;

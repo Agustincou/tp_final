@@ -43,10 +43,10 @@ module Main_Datapath_Test;
 	// Instantiate the Unit Under Test (UUT)
 	Main_Datapath uut (
 		.clk(clk), 
-		.clk_70(clk_70), 
+		.clk70(clk_70), 
 		.reset(reset), 
-		.uartRxPin(uartRxPin), 
-		.uartTxPin(uartTxPin), 
+		.uartRx(uartRxPin), 
+		.uartTx(uartTxPin), 
 		.ALUzero(ALUzero), 
 		.ALUOverflow(ALUOverflow), 
 		.ledIdle(ledIdle), 

@@ -21,18 +21,18 @@
 module Main_Datapath(clk, reset, uartRx, 
 							uartTx, ALUzero, ALUOverflow, ledIdle, sentFlag, notStartUartTx, ledDataAvailable, sendCounter);
 //-------------------------------------------Entradas-----------------------------------------//
-	input clk;    // clock principal
-	input reset;  // reset general
+	input clk;
+	input reset;
 	input uartRx;
 //--------------------------------------------Salidas-----------------------------------------//
 	output uartTx;
 	output ALUzero;
 	output ALUOverflow;
 	output ledIdle;
-	output sentFlag;			// bit de dato enviado en la unidad de debug
-	output notStartUartTx;		// bit de frenado de la UART desde la unidad de debug	
-	output ledDataAvailable;	// bit de dato disponible para lectura en la unidad de debug
-	output [7:0] sendCounter;	// contador de la unidad de debug
+	output sentFlag;
+	output notStartUartTx;
+	output ledDataAvailable;
+	output [7:0] sendCounter;
 //---------------------------------------------Wires------------------------------------------//
 	wire [31:0]instruction;
 	wire [31:0]instructionID;
@@ -210,7 +210,7 @@ module Main_Datapath(clk, reset, uartRx,
 		.LoadImm(loadImm),
 		.ZeroEx(zeroExtendFlag),
 		.EOP(endOfProgramFlag),
-		.memReadWidth(memReadWidth), // 0:Palabra completa 1:Media palabra 2:Byte
+		.memReadWidth(memReadWidth),
 	   .aluControlCU(aluControl)
 	 );
 	 
@@ -305,14 +305,13 @@ module Main_Datapath(clk, reset, uartRx,
 		.result(pcBranchAddr)
 	 );
 	 
-	 //sumador del contador de programa
 	 Sumador PCAdd(
 		//Entradas
 		.a(pcFE),
-		.b(8'b1),		// suma 1 y no 4 porque la memoria direcciones palabras de 32 bits, no bytes
+		.b(8'b1),
 		
 		//Salidas
-		.result(pcNext)	// genera el próximo contador de programa
+		.result(pcNext)
 	 );
 
 	IF_ID if_id(

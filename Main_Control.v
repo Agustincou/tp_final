@@ -356,8 +356,8 @@ module Main_Control(InstrOP, InstrFunc, RegDst, Branch, BranchType, Jump, MemToR
 		begin //J
 			EOP				<= 0;
 			RegDst			<= 0;
-			Branch			<= 1; //No importa
-			BranchType		<= 1; //No importa
+			Branch			<= 1;
+			BranchType		<= 1;
 			Jump        	<= 1;
 			MemToReg		<= 0;
 			MemWrite		<= 0;

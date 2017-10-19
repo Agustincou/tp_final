@@ -91,16 +91,16 @@ module Main_Debug(
 		input 	[31:0]	reg31,		
 		input 	[31:0] 	memoryRamData,
 //--------------------------------------------Salidas-----------------------------------------//
-		output 	[7:0] 	dataToSend,			// Lo que se envia por UART a la pc. Se envia de a 8 bits
-		output 	reg		nextFifoValue,		// Para que la FIFO me entregue el siguiente valor
-		output 	reg 		datapathOn,			// Activa el pipe
-		output 	reg 		datapathReset,		// flag para vaciar el pipe
-		output 				debugRamSrc,		// flag para activar la dirección alternativa en la RAM
-		output 	[7:0]		debugMemAddr,	// dirección para leer la memoria desde el debug
-		output 	reg 		ledIdle,			// led del estado IDLE
-		output 	reg 		notStartUartTrans,	// flag para evitar que la UART envíe
-		output 	reg[7:0]	sendCounter,	// cantidad de datos enviados
-		output 	reg 		flagDone		// cuando esta en uno termino de enviar
+		output 	[7:0] 	dataToSend,
+		output 	reg		nextFifoValue,
+		output 	reg 		datapathOn,
+		output 	reg 		datapathReset,
+		output 				debugRamSrc,
+		output 	[7:0]		debugMemAddr,
+		output 	reg 		ledIdle,
+		output 	reg 		notStartUartTrans,
+		output 	reg[7:0]	sendCounter,
+		output 	reg 		flagDone
     );//POR DEFAULT LOS OUTPUT SON WIRES
 //---------------------------------------------Wires------------------------------------------//
 	// array de datos a enviar para debug
@@ -389,7 +389,7 @@ module Main_Debug(
    assign data[246] =   memoryRamData		 [7:0];
 
 	assign dataToSend = data[sendCounter];
-	assign debugRamSrc = (current_state==SEND); //En estado SEND, la memoria usa la direccion del debug
+	assign debugRamSrc = (current_state==SEND);
 	assign debugMemAddr = (sendCounter>=183 && sendCounter<=186)? 0 :
 								  (sendCounter>=187 && sendCounter<=190)? 1 :
 								  (sendCounter>=191 && sendCounter<=194)? 2 :
@@ -511,26 +511,20 @@ module Main_Debug(
 				nextFifoValue=0;
 				datapathOn=0;
 				if(flagDone && !endOfProgram)begin
-					// se mandó el dato pero el programa no terminó
 					next_state=STEP;
 				end
 				else if(flagDone && endOfProgram)begin
-					// si terminó el programa y se envió el último dato
 					next_state=IDLE;
 				end
 				else begin
-					// si no terminó de mandar datos hay que volver a SEND
 				   next_state=SEND;
 					if(sendCounter>=247)begin
-						// si ya alcanzó la cantidad máxima de datos
-						// levanta la bandera de que terminó de enviar
-						// y bloquea la UART
 						flagDone=1;
 						notStartUartTrans=1;
 					end
 					else begin
 						flagDone=0;
-						notStartUartTrans=0; //Se le dice a la uart que envie
+						notStartUartTrans=0;
 					end
 				end
 			end

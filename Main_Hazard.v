@@ -55,8 +55,6 @@ module Main_Hazard(branchID, rsID, rtID, rsEX, rtEX, writeRegEX, writeRegMEM, wr
 		end
 //--------------------------------------Declaracion de Bloques--------------------------------//
 //--------------------------------------------Logica------------------------------------------//
-	//Si los origenes y destinos de los latches IF_ID y ID_EX coinciden, y los datos del latch ID_EX van a los registros, se mete un stall de load
-	//Pagina 409 en adelante
 	assign lwstall = ((rsID == rtEX) || (rtID == rtEX)) && memToRegEX;
 	assign stallFE = lwstall || branchstall;
 	assign stallID = lwstall || branchstall;
@@ -67,7 +65,6 @@ module Main_Hazard(branchID, rsID, rtID, rsEX, rtEX, writeRegEX, writeRegMEM, wr
 		
 	assign branchstall = (branchID && regWriteEX && (writeRegEX == rsID || writeRegEX == rtID)) || (branchID && memToRegMEM && (writeRegMEM == rsID || writeRegMEM == rtID));
 
-	//Cortocircuitos - Pagina 406 en adelante
 	always @* 
 	begin
 		if ((rsEX == writeRegMEM) && regWriteMEM)

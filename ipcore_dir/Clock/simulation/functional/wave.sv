@@ -89,16 +89,16 @@ group set -comment {}
 group clear 0 end
 
 group insert \
-    {Clock_tb.dut.clk[1]} \
-    {Clock_tb.dut.clk[2]} 
+    {Clock_tb.dut.clk} \
+
 group using {Counters}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
-    {Clock_tb.dut.counter[1]} \
-    {Clock_tb.dut.counter[2]} 
+    {Clock_tb.dut.counter} \
+
 group using {Status/control}
 group set -overlay 0
 group set -comment {}

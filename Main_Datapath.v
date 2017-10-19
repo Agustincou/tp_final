@@ -18,11 +18,10 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module Main_Datapath(clk, clk70, reset, uartRx, 
+module Main_Datapath(clk, reset, uartRx, 
 							uartTx, ALUzero, ALUOverflow, ledIdle, sentFlag, notStartUartTx, ledDataAvailable, sendCounter);
 //-------------------------------------------Entradas-----------------------------------------//
 	input clk;    // clock principal
-	input clk70; // clock desfasado 70 grados respecto del principal
 	input reset;  // reset general
 	input uartRx;
 //--------------------------------------------Salidas-----------------------------------------//
@@ -476,7 +475,7 @@ module Main_Datapath(clk, clk70, reset, uartRx,
 	 
 	 Main_Debug debugUnit(
 		//Entradas
-		.clock(clk70),
+		.clock(clk),
 		.reset(reset),
 		.endOfProgram(endOfProgramFlagWB),
 		.uartFifoDataIn(uartFifoDataIn),
@@ -562,7 +561,7 @@ module Main_Datapath(clk, clk70, reset, uartRx,
 	 
 	Main_Uart uartMod(
 		//Entradas
-		.clk(clk70),
+		.clk(clk),
 		.rx(uartRx),
 		.uart_reset(reset),
 		.readFlag(uartReadFlag),
@@ -676,5 +675,9 @@ module Main_Datapath(clk, clk70, reset, uartRx,
 	assign ledDataAvailable=uartDataAvailable;
 	assign notStartUartTx = notStartUartTrans;		
 	assign writeDataEX = srcBEX;
+
+	//reg uno = 1;
+	//assign uartDataAvailable = uno;
+	//assign uartFifoDataIn = "c";
 
 endmodule

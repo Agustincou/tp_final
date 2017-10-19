@@ -116,7 +116,8 @@ module Main_Debug(
 							IDLE = 1,
 							CONTINUOUS = 2,
 							STEP = 3,
-							SEND = 4;
+							SEND = 4,
+							WAIT = 5;
 	 
 	//cantidad total de datos a enviar
 	localparam [7:0]cantDatos=8'd246;
@@ -482,7 +483,7 @@ module Main_Debug(
 				flagDone=0;
 				if(uartDataAvailable)begin
 					if(uartFifoDataIn=="n")begin
-						next_state=SEND;
+						next_state=WAIT;
 						datapathOn=1;
 					end
 					else begin
@@ -496,6 +497,13 @@ module Main_Debug(
 					nextFifoValue=0;
 					datapathOn=0;
 				end
+			end
+			WAIT: begin
+				ledIdle=0;
+				datapathReset=0;
+				nextFifoValue=0;
+				datapathOn=0;
+				next_state=SEND;
 			end
 			SEND: begin
 				ledIdle=0;

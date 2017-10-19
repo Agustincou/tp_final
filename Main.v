@@ -34,21 +34,18 @@ module Main(clk, reset, uartRx, uartTx, ledIdle, sentFlag, notStartUartTx, ledDa
 	wire AluZero; 
 	wire ALUOverflow;
 	wire dcmOut;
-	wire dcmOut70;
 //-------------------------------------------Registros----------------------------------------//
 //-----------------------------------------Inicializacion-------------------------------------//
 //--------------------------------------Declaracion de Bloques--------------------------------//
 	//Modulo generado con IP core
 	Clock clock(
 		.CLK_IN1(clk),		// clock de la placa a 100MHz
-		.CLK_OUT1(dcmOut),	// clock a 12.5MHz
-		.CLK_OUT2(dcmOut70)	// clock a 12.5MHz desfasado 70 grados
+		.CLK_OUT1(dcmOut)
 	);
 	
 	Main_Datapath datapath( 		
 		//Entradas
 	   .clk(dcmOut),
-		.clk70(dcmOut70),
 		.reset(reset),
 		.uartRx(uartRx),
 		

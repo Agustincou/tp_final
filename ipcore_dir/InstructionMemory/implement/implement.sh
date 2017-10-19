@@ -31,7 +31,7 @@ cp ../example_design/InstructionMemory_exdes.ucf results/
 cd results
 
 echo 'Running ngdbuild'
-ngdbuild -p xc7a100t-csg324-3 InstructionMemory_exdes
+ngdbuild -p xc7a100t-csg324-1 InstructionMemory_exdes
 
 echo 'Running map'
 map InstructionMemory_exdes -o mapped.ncd -pr i

@@ -35,7 +35,7 @@ module Main_Uart(clk, rx, uart_reset, readFlag, dataToSend, uart_tx_start, recei
 	output			uart_tx_done;
 //------------------------------------Parametros para UART------------------------------------//
 	parameter BaudRate = 1200;
-	parameter clk_Mhz = 5;
+	parameter clk_Mhz = 60;
 	parameter DBIT = 8;
 	parameter SB_TICK = 16;
 //---------------------------------------------Wires------------------------------------------//

@@ -112,3 +112,6 @@ Thumbs.db
 
 planAhead*
 *.tcl
+*.spl
+*.sym
+ipcore_dir/tmp/

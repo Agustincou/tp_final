@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Xilinx/tp_final/Register_File_Test_isim_beh1.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="Register_File_Test" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="15" />
+   <wvobject fp_name="/Register_File_Test/read_data1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_data1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">read_data1[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#0000ff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/read_data2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_data2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">read_data2[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/read_data_to_debug_0" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_data_to_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">read_data_to_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/read_data_to_debug_1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_data_to_debug_1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">read_data_to_debug_1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/read_data_to_debug_2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_data_to_debug_2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">read_data_to_debug_2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/read_data_to_debug_3" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_data_to_debug_3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">read_data_to_debug_3[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/read_data_to_debug_4" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_data_to_debug_4[31:0]</obj_property>
+      <obj_property name="ObjectShortName">read_data_to_debug_4[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/wr_enable3" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">wr_enable3</obj_property>
+      <obj_property name="ObjectShortName">wr_enable3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/read_addr1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_addr1[4:0]</obj_property>
+      <obj_property name="ObjectShortName">read_addr1[4:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#0000ff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/read_addr2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">read_addr2[4:0]</obj_property>
+      <obj_property name="ObjectShortName">read_addr2[4:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/write_addr3" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">write_addr3[4:0]</obj_property>
+      <obj_property name="ObjectShortName">write_addr3[4:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/write_data3" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">write_data3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">write_data3[31:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Register_File_Test/uut/reg_file" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">reg_file[31:0,31:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_file[31:0,31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[31]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[31,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[31,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[30]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[30,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[30,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[29]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[29,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[29,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[28]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[28,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[28,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[27]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[27,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[27,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[26]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[26,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[26,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[25]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[25,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[25,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[24]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[24,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[24,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[23]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[23,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[23,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[22]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[22,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[22,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[21]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[21,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[21,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[20]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[20,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[20,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[19]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[19,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[19,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[18]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[18,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[18,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[17]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[17,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[17,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[16]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[16,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[16,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[15]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[15,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[15,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[14]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[14,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[14,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[13]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[13,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[13,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[12]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[12,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[12,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[11]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[11,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[11,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[10]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[10,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[10,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[9]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[9,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[9,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[8]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[8,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[8,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[7]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[7,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[7,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[6]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[6,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[6,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[5]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[5,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[5,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[4]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[4,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[4,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[3]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[3,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[3,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[2]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[2,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[2,31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[1]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[1,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[1,31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/Register_File_Test/uut/reg_file[0]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[0,31:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_file[0,31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

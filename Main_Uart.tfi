@@ -1,0 +1,18 @@
+
+
+
+// Instantiate the module
+Main_Uart instance_name (
+    .clk(clk), 
+    .rx(rx), 
+    .uart_reset(uart_reset), 
+    .readFlag(readFlag), 
+    .dataToSend(dataToSend), 
+    .uart_tx_start(uart_tx_start), 
+    .receivedData(receivedData), 
+    .dataAvailable(dataAvailable), 
+    .tx(tx), 
+    .uart_tx_done(uart_tx_done)
+    );
+
+
